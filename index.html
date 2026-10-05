@@ -46,13 +46,14 @@
   .sec-hdr.locked { background: #eef1f4; border-color: #dde2e7; }
   .sec-hdr.locked h3 { color: #7b8794; }
   .sec-body.locked { opacity: .5; pointer-events: none; }
+  .lockable.lock { opacity: .45; pointer-events: none; }
   .demobar .right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
   .ghost {
     background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.35); color: #fff;
     border-radius: 4px; padding: 5px 10px; font-size: 12px;
   }
 
-  .stage { padding: 18px 14px 60px; display: flex; justify-content: center; }
+  .stage { padding: 18px 14px 60px; }
   .modal {
     width: 100%; max-width: 880px; background: #fff; border: 1px solid #c9d3dd;
     border-radius: 3px; box-shadow: 0 8px 30px rgba(20,40,70,.18);
@@ -89,10 +90,39 @@
   .sec-hdr .chev { margin-left: auto; color: #5b7794; }
   .sec-body { padding: 14px 16px 16px; }
   .addstop { background: #eaf3fc; padding: 10px 16px; border-bottom: 1px solid #cadff2; }
+  .ribbon {
+    background: #fff8e8; border-top: 1px solid #f0dcae; border-bottom: 1px solid #f0dcae;
+    padding: 11px 16px; display: flex; align-items: center; gap: 10px; cursor: pointer;
+  }
+  .ribbon:hover { background: #fff3d8; }
+  .ribbon .rlabel { color: #b57500; font-size: 15px; font-weight: bold; }
+  .ribbon .rtag {
+    background: var(--amber); color: #3a2a00; font-size: 9.5px; font-weight: bold;
+    padding: 2px 6px; border-radius: 2px;
+  }
+  .ribbon .rwhy { color: var(--mute); font-size: 12px; font-style: italic; }
+  .ribbon .plus, .circ {
+    width: 22px; height: 22px; border-radius: 50%; border: 1px solid #e0b96a; background: transparent;
+    display: inline-flex; align-items: center; justify-content: center; color: #b57500; font-size: 15px;
+    line-height: 1; padding: 0;
+  }
+  .circ { flex: 0 0 auto; }
+  .ribbon.dis { background: #f4f6f8; border-color: #dde2e7; cursor: default; }
+  .ribbon.dis:hover { background: #f4f6f8; }
+  .ribbon.dis .rlabel { color: #98a3af; }
+  .ribbon.dis .rtag { background: #c2cbd4; color: #fff; }
+  .ribbon.dis .plus { color: #b4bcc4; border-color: #d7dde3; }
+  .critwrap { min-height: 208px; }
+  .critrows { margin-top: 10px; }
+  .critrows.off { display: none; }
+  .crow { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .crow label.f { margin: 0; flex: 0 0 175px; }
+  .crow select.inp { max-width: 170px; }
   .addstop a { font-size: 14px; }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 26px; }
   .grid2 > div { min-width: 0; }
-  .divider-l { border-left: 1px dashed #cbd5df; padding-left: 26px; }
+  .divider-l { padding-left: 0; }
+  .binsplit { border-left: 1px dotted #d9c9a4; padding-left: 26px; }
 
   label.f { display: block; font-size: 12.5px; color: #444; margin: 0 0 3px; }
   label.f .req { color: var(--red); }
@@ -126,6 +156,11 @@
   .minitabs button.on { background: var(--blue); color: #fff; }
   .jobtype button { border-color: var(--amber); color: #b57500; }
   .jobtype button.on { background: var(--amber); color: #3a2a00; font-weight: bold; }
+  .minitabs.seg { display: inline-flex; margin: 0; vertical-align: middle; }
+  .minitabs.seg button { font-size: 12px; padding: 4px 14px; }
+  .minitabs.seg.wide button { padding: 6px 16px; }
+  .minitabs.seg.off button { border-color: #c2cbd4; color: #9aa5b1; cursor: not-allowed; }
+  .minitabs.seg.off button.on { background: #c2cbd4; color: #fff; }
   .accordion {
     border: 1px solid var(--line); border-radius: 3px; padding: 9px 11px; color: #444;
     display: flex; align-items: center; font-size: 12.5px; margin-top: 6px;
@@ -161,15 +196,16 @@
   .switch input { width: 16px; height: 16px; }
   .switch strong { font-size: 13.5px; }
   .switch.dis strong { color: #98a3af; }
-  .tip { position: relative; display: inline-flex; }
+  .tip { position: relative; display: inline-flex; align-items: center; }
+  .lbltip { display: flex; align-items: center; gap: 11px; }
   .tip .ic {
     width: 16px; height: 16px; border-radius: 50%; background: #cfdae5; color: #33506e;
     font-size: 11px; font-weight: bold; display: inline-flex; align-items: center; justify-content: center;
     border: 0; line-height: 1;
   }
   .tip .bubble {
-    display: none; position: absolute; left: 22px; top: -6px; width: 290px; background: #24405c; color: #fff;
-    padding: 9px 11px; border-radius: 4px; font-size: 11.5px; line-height: 1.45; z-index: 40;
+    display: none; position: absolute; left: 32px; top: -10px; width: 290px; background: #24405c; color: #fff;
+    padding: 10px 13px; border-radius: 4px; font-size: 11.5px; line-height: 1.45; z-index: 40;
     box-shadow: 0 6px 18px rgba(0,0,0,.22); font-weight: normal;
   }
   .tip:hover .bubble, .tip:focus-within .bubble { display: block; }
@@ -178,7 +214,7 @@
     font-size: 12.5px; color: #55606b; line-height: 1.5;
   }
   .disabledmsg b { display: block; color: #3d4750; }
-  .binfields { margin-top: 14px; border-top: 1px dashed #e6d3a8; padding-top: 14px; }
+  .binfields { margin-top: 0; }
   .binfields.off { display: none; }
   .radios { display: grid; gap: 7px; margin-top: 4px; }
   .radios label { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; }
@@ -260,11 +296,6 @@
   }
   .toast b { display: block; margin-bottom: 3px; }
   .toast button { background: var(--amber); border: 0; color: #3a2a00; font-weight: bold; padding: 5px 9px; border-radius: 3px; margin-top: 8px; font-size: 11.5px; }
-  .simbar {
-    max-width: 880px; width: 100%; margin: 0 auto 14px; background: #fff; border: 1px dashed #b9c6d3;
-    border-radius: 3px; padding: 10px 12px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
-  }
-  .simbar strong { font-size: 12px; color: #46596d; text-transform: uppercase; letter-spacing: .4px; }
   .hidden { display: none !important; }
   @media (max-width: 760px) {
     .grid2 { grid-template-columns: 1fr; }
@@ -287,17 +318,8 @@
 </div>
 
 <div class="stage">
-  <div style="width:100%;max-width:980px">
+  <div style="width:100%;max-width:900px">
 
-    <div class="simbar" id="simbar">
-      <strong>Demo controls</strong>
-      <select class="inp" id="leadSel" style="max-width:270px">
-        <option value="4">Collection in 4 days — Take It Now available</option>
-        <option value="2">Collection in 2 days (48 hrs) — available</option>
-        <option value="1">Collection tomorrow (24 hrs) — disabled</option>
-        <option value="0">Collection today — disabled</option>
-      </select>
-    </div>
 
     <!-- =============================== POST LOAD =============================== -->
     <div id="view-post">
@@ -353,6 +375,118 @@
           </div>
         </div>
 
+        <!-- ---------------- TAKE IT NOW ---------------- -->
+        <div class="ribbon" id="binRibbon">
+          <span class="plus">+</span>
+          <span class="rlabel">Add Take It Now</span>
+          <span class="rtag">NEW</span>
+          <span class="rwhy" id="binWhy"></span>
+        </div>
+
+        <div class="sec-hdr bin-hdr hidden" id="binHdr">
+          <button type="button" class="circ" id="binRemove" aria-label="Remove Take It Now">&minus;</button>
+          <h3>Take It Now</h3><span class="tag" id="binTag">NEW</span>
+          <span class="note" id="binHint"></span>
+          <span class="chev">&#9652;</span>
+        </div>
+        <div class="bin-body hidden" id="binBody">
+
+          <div class="binfields" id="binFields">
+            <div class="grid2">
+              <div>
+                <label class="f">Who can Take It Now</label>
+                <div class="minitabs seg wide" id="whoCan">
+                  <button type="button" data-w="criteria" class="on">My criteria</button>
+                  <button type="button" data-w="groups">My groups</button>
+                  <button type="button" data-w="any">Any member</button>
+                </div>
+
+                <div class="critwrap">
+                <div class="critrows" id="criteriaBox">
+                  <div class="crow">
+                    <label class="f">Feedback from</label>
+                    <select class="inp" id="fbWindow">
+                      <option>Past 90 days</option><option>Past 180 days</option>
+                      <option selected>Past 360 days</option><option>All time</option>
+                    </select>
+                  </div>
+                  <div class="crow">
+                    <label class="f">Positive feedback</label>
+                    <select class="inp" id="minPos">
+                      <option>Not applicable</option><option>At least 10</option>
+                      <option selected>At least 25</option><option>At least 100</option>
+                    </select>
+                  </div>
+                  <div class="crow">
+                    <label class="f">Negative feedback</label>
+                    <select class="inp" id="maxNeg">
+                      <option>Not applicable</option><option>None</option>
+                      <option selected>Up to 2</option><option>Up to 5</option>
+                    </select>
+                  </div>
+                  <div class="crow">
+                    <label class="f">Upheld complaints</label>
+                    <select class="inp" id="complaints">
+                      <option selected>Not applicable</option><option>None</option>
+                      <option>Up to 1</option><option>Up to 2</option>
+                    </select>
+                  </div>
+                  <div class="cbx" style="margin-top:10px"><input type="checkbox" id="trustdDrivers" checked><span>Trustd drivers only</span></div>
+                  <div class="cbx" style="margin-top:7px"><input type="checkbox" id="prevTrading"><span>Only members I have worked with before</span></div>
+                </div>
+
+                <div class="critrows off" id="groupsBox">
+                  <div class="crow">
+                    <label class="f">Groups that can Take It Now</label>
+                    <select class="inp" id="binGroups">
+                      <option>Midlands Regulars (12)</option>
+                      <option>Trusted Curtainsiders (28)</option>
+                      <option>Nuneaton Backload Partners (9)</option>
+                      <option>Chad 1 (6)</option>
+                      <option>All my groups (55)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="critrows off" id="anyBox">
+                  <div class="hint" style="margin-top:4px">
+                    No criteria applied. Any member who can see this load can take it at your rate.
+                  </div>
+                </div>
+                </div>
+
+              </div>
+
+              <div class="divider-l binsplit">
+                <div class="fg">
+                  <label class="f">Take It Now Rate <span class="req">*</span></label>
+                  <div class="row" style="gap:6px">
+                    <select class="inp" style="max-width:78px"><option>GBP</option><option>EUR</option></select>
+                    <input class="inp" id="binPrice" value="480.00" style="max-width:110px">
+                  </div>
+                </div>
+                <div style="font-weight:bold;font-size:14px;margin:2px 0 14px">Total: £ <span id="binTotal">480.00</span></div>
+
+                <label class="f lbltip" style="margin-top:18px">
+                  <span>Accept quotes on this load</span>
+                  <span class="tip" tabindex="0">
+                    <button class="ic" type="button" aria-label="About accepting quotes">i</button>
+                    <span class="bubble">Allows members to send you quotes for this load.</span>
+                  </span>
+                </label>
+                <div class="minitabs seg" id="quotesYN" style="margin-top:2px">
+                  <button type="button" data-q="1" class="on">Yes</button>
+                  <button type="button" data-q="0">No</button>
+                </div>
+                <div id="quoteOpts" style="margin-top:12px">
+                  <div class="cbx"><input type="checkbox" id="spOnly" checked onchange="window.__sync()"><span>SmartPay members only</span></div>
+                  <div class="cbx" style="margin-top:9px;margin-left:22px"><input type="checkbox" id="euQuotes" checked onchange="window.__sync()"><span>Also include EU members</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- ---------------- Pickup / Delivery ---------------- -->
         <div class="sec-hdr">
           <h3 style="flex:0 0 auto">Pickup Details</h3>
@@ -375,7 +509,13 @@
               <label class="f">Date &amp; Time <span class="req">*</span></label>
               <div class="minitabs"><button class="on">Between</button><button>At</button><button>Before</button></div>
               <div class="row">
-                <div class="fg" style="flex:1.4"><label class="f">From <span class="req">*</span></label><input class="inp" id="pickFrom" readonly></div>
+                <div class="fg" style="flex:1.4"><label class="f">From <span class="req">*</span></label>
+                  <select class="inp" id="pickFrom">
+                    <option value="0"></option><option value="1"></option>
+                    <option value="2"></option><option value="4" selected></option>
+                    <option value="7"></option>
+                  </select>
+                </div>
                 <div class="fg" style="max-width:72px"><label class="f">&nbsp;</label><select class="inp"><option>08</option></select></div>
                 <div class="fg" style="max-width:72px"><label class="f">&nbsp;</label><select class="inp"><option>00</option></select></div>
               </div>
@@ -480,7 +620,7 @@
         <div class="sec-body" id="notifyBody">
           <div class="grid2">
             <div>
-              <div class="fg">
+              <div class="fg lockable" id="advertiseRow">
                 <label class="f">Advertise This Load To</label>
                 <select class="inp" id="advertiseTo">
                   <option>All Members</option>
@@ -497,144 +637,24 @@
                 <span class="hint">minutes, repost to</span>
               </div>
               <select class="inp" style="margin-bottom:12px"><option>All Members</option></select>
-              <label class="f">Notify all live tracked drivers within</label>
-              <div class="stepper" style="margin-bottom:10px"><button>−</button><input value="30"><button>+</button> <span class="hint">miles of the pick-up</span></div>
-              <div class="cbx"><input type="checkbox"><span>Tracked Driver Preferred</span></div>
-              <div class="cbx" style="margin-top:7px" id="eqRow">
+              <div class="lockable" id="trackedRow">
+                <label class="f">Notify all live tracked drivers within</label>
+                <div class="stepper" style="margin-bottom:10px"><button>−</button><input value="30"><button>+</button> <span class="hint">miles of the pick-up</span></div>
+              </div>
+              <div class="cbx lockable" id="trackedPrefRow"><input type="checkbox"><span>Tracked Driver Preferred</span></div>
+              <div class="cbx lockable" style="margin-top:7px" id="eqRow">
                 <input type="checkbox" id="elecQuotes" checked><span><b>Electronic Quotes</b></span>
               </div>
-              <div class="hint hidden" id="eqLock" style="margin-left:22px">Set by <b>Also accept quotes</b> in Take It Now.</div>
-              <div class="cbx" style="margin-top:7px"><input type="checkbox" checked><span>Accept quotes from SmartPay members only</span></div>
-              <div class="cbx ind" style="margin-top:7px"><input type="checkbox" checked><span>Also accept quotes from EU members</span></div>
+              <div class="cbx lockable" style="margin-top:7px" id="spRowN"><input type="checkbox" checked><span>Accept quotes from SmartPay members only</span></div>
+              <div class="cbx ind lockable" style="margin-top:7px" id="euRowN"><input type="checkbox" checked><span>Also accept quotes from EU members</span></div>
+              <div class="hint hidden" id="eqLock" style="margin-top:10px">The greyed settings above are controlled by
+                your Take It Now section and cannot be changed here.</div>
             </div>
             <div class="divider-l">
               <div class="infonote">
                 <b>Note:</b> your load will also be sent to all members whose "home" notification area includes the
                 pick-up location for your posting.
               </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ---------------- TAKE IT NOW ---------------- -->
-        <div class="sec-hdr bin-hdr" id="binHdr">
-          <h3>Take It Now</h3><span class="tag" id="binTag">NEW · OPTIONAL</span>
-          <span class="note" id="binHint"></span>
-          <span class="chev">&#9652;</span>
-        </div>
-        <div class="bin-body" id="binBody">
-
-          <div class="disabledmsg hidden" id="binDisabled"></div>
-
-          <div class="switch" id="binSwitch">
-            <input type="checkbox" id="binOn">
-            <strong>Offer a Take It Now price</strong>
-            <span class="tip" tabindex="0">
-              <button class="ic" type="button" aria-label="What is Take It Now?">i</button>
-              <span class="bubble">Take It Now lets a member take this load at the price you set, without quoting or
-                negotiating. You choose who can do it, and whether it is allocated automatically or waits for your
-                approval. Available on loads collecting in 48 hours or more, for vehicles of 7.5t and above.</span>
-            </span>
-          </div>
-
-          <div class="binfields off" id="binFields">
-            <div class="grid2">
-              <div>
-                <div class="fg" style="max-width:200px">
-                  <label class="f">Take It Now price <span class="req">*</span></label>
-                  <div class="money"><span>£</span><input id="binPrice" value="480.00"></div>
-                </div>
-                <div class="fg" style="max-width:300px">
-                  <label class="f">Take It Now price expires</label>
-                  <select class="inp" id="expiry">
-                    <option value="48">48 hours before collection</option>
-                    <option value="24" selected>24 hours before collection</option>
-                    <option value="4">4 hours before collection</option>
-                    <option value="p24">24 hours after posting</option>
-                    <option value="never">Only when I withdraw it</option>
-                  </select>
-                </div>
-                <div class="fg">
-                  <div class="cbx">
-                    <input type="checkbox" id="alsoQuotes" checked>
-                    <span>Also accept quotes on this load</span>
-                  </div>
-                  <div class="hint" id="quoteHint"></div>
-                </div>
-              </div>
-
-              <div class="divider-l">
-                <label class="f">Allocation</label>
-                <div class="radios" id="allocMode">
-                  <label><input type="radio" name="alloc" value="auto"><span><b>Auto-allocate</b> to the first eligible member who accepts</span></label>
-                  <label><input type="radio" name="alloc" value="approve" checked><span><b>Require my approval</b> before the load is allocated</span></label>
-                </div>
-                <div class="sub" id="approveBox">
-                  <div class="line">I will approve or decline within
-                    <select class="inp" id="approveWin">
-                      <option value="30" selected>30 minutes</option>
-                      <option value="60">1 hour</option>
-                      <option value="120">2 hours</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <label class="f" style="margin-top:6px">Who can Take It Now</label>
-            <div class="radios" id="whoCan">
-              <label><input type="radio" name="who" value="any"><span>Any member</span></label>
-              <label><input type="radio" name="who" value="criteria" checked><span>Members who meet my criteria</span></label>
-              <label><input type="radio" name="who" value="groups"><span>My groups</span></label>
-            </div>
-
-            <div class="sub" id="criteriaBox">
-              <div class="line">Minimum feedback rating
-                <select class="inp" id="minRating"><option>3.5</option><option selected>4.0</option><option>4.5</option></select>
-                and above
-              </div>
-              <div class="line">Minimum load tracking
-                <select class="inp" id="minTrack">
-                  <option>None</option><option>Low</option><option>Moderate</option>
-                  <option selected>High</option><option>Very High</option>
-                </select>
-              </div>
-              <div class="line">Minimum loads completed with TEG
-                <select class="inp" id="minLoads"><option>5</option><option selected>25</option><option>100</option></select>
-              </div>
-              <div class="line">Minimum on-time delivery
-                <select class="inp" id="minOnTime"><option>No minimum</option><option selected>90%</option><option>95%</option></select>
-              </div>
-              <div class="line">Maximum cancellation rate
-                <select class="inp" id="maxCancel"><option>No maximum</option><option selected>5%</option><option>2%</option></select>
-              </div>
-              <div class="line"><input type="checkbox" id="trustd" checked> Trustd members only</div>
-              <div class="line">Verified drivers
-                <span class="yn" id="ynDrivers"><button data-v="yes" class="on">Yes</button><button data-v="no">No</button></span>
-              </div>
-              <div class="line">Only members I have worked with before
-                <span class="yn" id="ynWorked"><button data-v="yes">Yes</button><button data-v="no" class="on">No</button></span>
-              </div>
-              <div class="line"><input type="checkbox" checked> Goods in transit cover verified, in date and at or above load value</div>
-            </div>
-
-            <div class="sub" id="groupsBox">
-              <div class="line">Groups that can Take It Now
-                <select class="inp" id="binGroups" style="max-width:250px">
-                  <option>Midlands Regulars (12)</option>
-                  <option>Trusted Curtainsiders (28)</option>
-                  <option>Nuneaton Backload Partners (9)</option>
-                  <option>Chad 1 (6)</option>
-                  <option>All my groups (55)</option>
-                </select>
-              </div>
-              <div class="hint">Add or edit groups in your profile.</div>
-            </div>
-
-            <label class="f" style="margin-top:14px">Booking Footer</label>
-            <div class="hint" style="margin-top:0">
-              Your cancellation and waiting time terms apply to a Take It Now booking. If you would like to change them,
-              you can update them on your profile.
             </div>
           </div>
         </div>
@@ -747,8 +767,7 @@
   var DAY = 86400000;
   var state = {
     view: "post", lead: 4, jobType: "hotshot", binOn: false, price: "480.00",
-    expiry: "24", alsoQuotes: true, alloc: "approve", approveWin: 30, autoKnown: false,
-    who: "criteria", drivers: "yes", worked: "no", posted: false, step: 1
+    alsoQuotes: true, who: "criteria", posted: false, step: 1
   };
 
   function $(id) { return document.getElementById(id); }
@@ -787,7 +806,6 @@
     Array.prototype.forEach.call($("segs").children, function (b) {
       b.classList.toggle("on", b.dataset.v === v);
     });
-    $("simbar").classList.toggle("hidden", v === "review");
     if (v === "carrier") renderLoads();
     if (v === "review") renderReview();
     window.scrollTo(0, 0);
@@ -801,7 +819,9 @@
 
   /* ---------------- form ---------------- */
   function renderForm() {
-    $("pickFrom").value = fmt(pickDate());
+    Array.prototype.forEach.call($("pickFrom").options, function (o) {
+      o.textContent = fmt(new Date(Date.now() + Number(o.value) * DAY));
+    });
     $("pickTo").value = fmt(pickDate());
     $("dropOn").value = fmt(dropDate());
 
@@ -810,62 +830,70 @@
 
     $("binHdr").classList.toggle("dis", !ok);
     $("binBody").classList.toggle("dis", !ok);
-    $("binTag").textContent = ok ? "NEW · OPTIONAL" : "NOT AVAILABLE";
-    $("binSwitch").classList.toggle("hidden", !ok);
-    $("binOn").checked = state.binOn;
-    $("binDisabled").classList.toggle("hidden", ok);
-    if (!ok) {
-      var why = [];
-      if (!leadOk()) {
-        why.push("Collection is " + (state.lead === 0 ? "today" : "tomorrow") +
-          ". Take It Now needs at least 48 hours between posting and collection, so members can commit a vehicle.");
-      }
-      if (!vehicleOk()) {
-        why.push("Take It Now is available on vehicles of 7.5t and above. This load is set to " +
-          $("vehSel").value + ".");
-      }
-      $("binDisabled").innerHTML = "<b>Take It Now is not available on this load.</b>" + why.join(" ") +
-        " Post it for quotes as normal, or change the load to make it eligible.";
-    }
-    $("binHint").textContent = !ok ? "Needs 48 hours or more before collection, on a 7.5t vehicle or larger."
-      : state.binOn ? "Members meeting your criteria can take this load at £" + priceNum().toFixed(2) + "." : "";
+    $("binTag").textContent = "NEW";
+    var ribbon = $("binRibbon");
+    ribbon.classList.toggle("dis", !ok);
+    ribbon.classList.toggle("hidden", state.binOn);
+    $("binHdr").classList.toggle("hidden", !state.binOn);
+    $("binBody").classList.toggle("hidden", !state.binOn);
 
-    $("binFields").classList.toggle("off", !state.binOn);
+    var why = [];
+    if (!leadOk()) why.push("collection is less than 48 hours away");
+    if (!vehicleOk()) why.push("the vehicle is under 7.5t");
+    $("binWhy").textContent = ok ? "" : "Not available — " + why.join(" and ") + ".";
 
-    $("alsoQuotes").checked = state.alsoQuotes;
-    $("quoteHint").textContent = state.alsoQuotes
-      ? "Members can take it at your price, or send you a quote."
-      : "Take It Now only. This load will not appear in quote searches.";
+    $("binHint").textContent = state.binOn
+      ? "Members meeting your criteria can take this load at £" + priceNum().toFixed(2) + "." : "";
 
-    $("approveBox").classList.toggle("off", state.alloc !== "approve");
+    $("binTotal").textContent = priceNum().toFixed(2);
+    Array.prototype.forEach.call($("quotesYN").children, function (b) {
+      b.classList.toggle("on", (b.dataset.q === "1") === state.alsoQuotes);
+    });
+    $("quoteOpts").classList.toggle("hidden", !state.alsoQuotes);
+
+    Array.prototype.forEach.call($("whoCan").children, function (b) {
+      b.classList.toggle("on", b.dataset.w === state.who);
+    });
     $("criteriaBox").classList.toggle("off", state.who !== "criteria");
     $("groupsBox").classList.toggle("off", state.who !== "groups");
+    $("anyBox").classList.toggle("off", state.who !== "any");
 
-    /* Take It Now takes over the notification settings while it is on */
+    /* Take It Now governs some of the notification settings while it is on */
     var eq = $("elecQuotes");
-    eq.checked = state.binOn ? state.alsoQuotes : eq.checked;
-    eq.disabled = state.binOn;
-    $("eqRow").classList.toggle("dis", state.binOn);
+    if (state.binOn) {
+      eq.checked = state.alsoQuotes;
+      $("spRowN").querySelector("input").checked = state.alsoQuotes && $("spOnly").checked;
+      $("euRowN").querySelector("input").checked = state.alsoQuotes && $("euQuotes").checked;
+    }
+    ["advertiseRow", "trackedPrefRow", "eqRow", "spRowN", "euRowN"].forEach(function (id) {
+      $(id).classList.toggle("lock", state.binOn);
+    });
+    $("trackedRow").classList.toggle("lock", state.binOn && !state.alsoQuotes);
     $("eqLock").classList.toggle("hidden", !state.binOn);
-    $("notifyHdr").classList.toggle("locked", state.binOn);
-    $("notifyBody").classList.toggle("locked", state.binOn);
     $("notifyNote").textContent = state.binOn
-      ? "Not available while Take It Now is on — set below."
+      ? "Some settings are controlled by your Take It Now section."
       : "";
   }
 
-  $("leadSel").onchange = function () { state.lead = Number(this.value); renderForm(); renderLoads(); };
-  $("binOn").onchange = function () { state.binOn = this.checked; renderForm(); };
+  $("binRibbon").onclick = function () {
+    if (!eligible()) return;
+    state.binOn = true;
+    renderForm();
+  };
+  $("binRemove").onclick = function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    state.binOn = false;
+    renderForm();
+  };
   $("binPrice").oninput = function () { state.price = this.value; renderForm(); };
-  $("expiry").onchange = function () { state.expiry = this.value; renderForm(); };
-  $("alsoQuotes").onchange = function () { state.alsoQuotes = this.checked; renderForm(); };
-  $("approveWin").onchange = function () { state.approveWin = Number(this.value); };
-  $("vehSel").onchange = function () { renderForm(); renderLoads(); };
-  Array.prototype.forEach.call($("allocMode").querySelectorAll("input"), function (r) {
-    r.onchange = function () { state.alloc = r.value; renderForm(); };
+  Array.prototype.forEach.call($("quotesYN").children, function (b) {
+    b.onclick = function () { state.alsoQuotes = b.dataset.q === "1"; renderForm(); };
   });
-  Array.prototype.forEach.call($("whoCan").querySelectorAll("input"), function (r) {
-    r.onchange = function () { state.who = r.value; renderForm(); };
+  $("pickFrom").onchange = function () { state.lead = Number(this.value); renderForm(); renderLoads(); };
+  $("vehSel").onchange = function () { renderForm(); renderLoads(); };
+  Array.prototype.forEach.call($("whoCan").children, function (b) {
+    b.onclick = function () { state.who = b.dataset.w; renderForm(); };
   });
   Array.prototype.forEach.call($("jobType").children, function (t) {
     t.onclick = function () {
@@ -874,17 +902,6 @@
       state.jobType = t.dataset.j;
     };
   });
-  function wireYN(id, key) {
-    Array.prototype.forEach.call($(id).children, function (b) {
-      b.onclick = function () {
-        Array.prototype.forEach.call($(id).children, function (x) { x.classList.remove("on"); });
-        b.classList.add("on");
-        state[key] = b.dataset.v;
-      };
-    });
-  }
-  wireYN("ynDrivers", "drivers");
-  wireYN("ynWorked", "worked");
 
   $("postBtn").onclick = function () {
     state.posted = true;
@@ -916,14 +933,14 @@
     };
   });
 
-  function loadRow(l, idx) {
+  function loadRow(l) {
     var price = l.self ? priceNum() : l.price;
     var lead = l.self ? state.lead : l.lead;
     var leadTxt = lead === 0 ? "collects today" : lead === 1 ? "collects tomorrow" : "collects in " + lead + " days";
     var act;
     if (l.bin) {
       act = '<div class="price">£' + price + '</div>' +
-        '<button class="btn-amber" data-idx="' + idx + '">Accept now</button>' +
+        '<button class="btn-amber" data-accept="' + (l.self ? "1" : "0") + '">Accept now</button>' +
         (l.self && state.alsoQuotes ? '<button class="btn" style="padding:4px 10px">or send quote</button>' : "");
     } else {
       act = '<button class="btn btn-blue" style="padding:6px 12px">Send quote</button>';
@@ -940,41 +957,35 @@
   }
 
   function renderLoads() {
-    var indexed = LOADS.map(function (l, i) { return { l: l, i: i }; })
-      .filter(function (p) { return !(p.l.self && !(state.posted && state.binOn)); });
-    var bins = indexed.filter(function (p) { return p.l.bin; });
-    var stds = indexed.filter(function (p) { return !p.l.bin; });
+    var list = LOADS.filter(function (l) { return !(l.self && !(state.posted && state.binOn)); });
+    var bins = list.filter(function (l) { return l.bin; });
+    var stds = list.filter(function (l) { return !l.bin; });
     var html = "";
     if (filter === "all" || filter === "bin" || filter === "fleet") {
-      html += '<div class="grp">Take It Now — take it at the posted price (' + bins.length + ')</div>' +
-        bins.map(function (p) { return loadRow(p.l, p.i); }).join("");
+      html += '<div class="grp">Take It Now — take it at the posted price (' + bins.length + ')</div>' + bins.map(loadRow).join("");
     }
     if (filter === "all" || filter === "std" || filter === "fleet") {
-      html += '<div class="grp">Quote only (' + stds.length + ')</div>' +
-        stds.map(function (p) { return loadRow(p.l, p.i); }).join("");
+      html += '<div class="grp">Quote only (' + stds.length + ')</div>' + stds.map(loadRow).join("");
     }
     $("loadList").innerHTML = html;
-    Array.prototype.forEach.call($("loadList").querySelectorAll("[data-idx]"), function (b) {
-      b.onclick = function () { openSheet(Number(b.dataset.idx)); };
+    Array.prototype.forEach.call($("loadList").querySelectorAll("[data-accept]"), function (b) {
+      b.onclick = function () { openSheet(b.dataset.accept === "1"); };
     });
   }
 
   /* ---------------- accept sheet ---------------- */
   var sheetSelf = true;
-  var sheetLoad = LOADS[0];
-  function openSheet(idx) {
-    sheetLoad = LOADS[idx];
-    sheetSelf = !!sheetLoad.self;
-    state.step = 1;
+  function openSheet(isSelf) {
+    sheetSelf = isSelf; state.step = 1;
     $("sheetWrap").classList.remove("hide");
     renderSheet();
   }
   $("sheetClose").onclick = function () { $("sheetWrap").classList.add("hide"); };
 
   function renderSheet() {
-    var price = sheetSelf ? priceNum() : sheetLoad.price;
-    var lane = sheetLoad.from + " → " + sheetLoad.to;
-    var approves = sheetSelf ? state.alloc === "approve" : false;
+    var price = sheetSelf ? priceNum() : 720;
+    var lane = sheetSelf ? "Nuneaton CV11 → Leeds LS10" : "Coventry CV6 → Carlisle CA1";
+    var approves = false;
     var steps = $("sheetSteps").children, idx = [0, 2, 4, 6];
     Array.prototype.forEach.call(steps, function (s) { s.classList.remove("on"); });
     steps[idx[state.step - 1]].classList.add("on");
@@ -987,12 +998,12 @@
         (approves ? ", subject to the load poster approving within 30 minutes." : " — no quoting, no waiting.") + '</div></div>' +
         '<div class="kv">Collection <b>' + fmt(pickDate()) + ' 08:00 – 12:00</b></div>' +
         '<div class="kv">Delivery <b>' + fmt(dropDate()) + ' · ASAP</b></div>' +
-        '<div class="kv">Vehicle required <b>' + sheetLoad.veh + '</b></div>' +
-        '<div class="kv">Load <b>' + sheetLoad.load + '</b></div>' +
+        '<div class="kv">Vehicle required <b>18t Curtainsider</b></div>' +
+        '<div class="kv">Load <b>12 pallets · 8,400 kg</b></div>' +
         '<div class="kv">Job type <b>' + (state.jobType === "hotshot" ? "Hotshot" : "Backload") + '</b></div>' +
-        '<div class="kv">Posted by <b>' + sheetLoad.poster + ' · ★ ' + sheetLoad.rating + ' · pays ' + sheetLoad.pay + '</b></div>' +
+        '<div class="kv">Posted by <b>Hartwell Distribution Ltd · ★ 4.7 · pays in 28 days on average</b></div>' +
         '<div class="kv">Take It Now price <b style="font-size:15px">£' + price + '.00</b></div>' +
-        '<div class="kv">Price available until <b>24 hours before collection</b></div>';
+        '';
       foot = '<button class="btn" data-close>Back to loads</button>' +
         '<button class="btn btn-amber" data-next style="margin-left:auto">Accept at £' + price + '</button>';
     } else if (state.step === 2) {
@@ -1000,8 +1011,8 @@
         '<div class="kv">Rate <b>£' + price + '.00</b></div>' +
         '<div class="kv">Payment terms <b>30 days, end of month</b></div>' +
         '<div class="kv">Exchange fee <b>£4.50</b></div>' +
-        '<div class="kv">Contracting with <b>' + sheetLoad.poster + '</b></div>' +
-        '<div class="kv">Booking Footer <b>' + sheetLoad.poster + '\'s cancellation and waiting time terms apply</b></div>' +
+        '<div class="kv">Contracting with <b>Hartwell Distribution Ltd</b></div>' +
+        '<div class="kv">Booking Footer <b>Hartwell Distribution Ltd\'s cancellation and waiting time terms apply</b></div>' +
         '<div class="cbx" style="margin-top:12px"><input type="checkbox" id="agree"><span>I accept these terms for this load</span></div>';
       foot = '<button class="btn" data-back>Back</button>' +
         '<button class="btn btn-amber" data-next id="agreeNext" style="margin-left:auto" disabled>Continue</button>';
@@ -1041,7 +1052,7 @@
     Array.prototype.forEach.call($("sheetFoot").querySelectorAll("[data-close]"), function (b) {
       b.onclick = function () {
         $("sheetWrap").classList.add("hide");
-        if (state.step === 4 && sheetSelf && state.alloc === "approve") {
+        if (false) {
           toast("Waiting on the load poster", "You accepted at £" + priceNum().toFixed(2) + ".",
             "See their side", function () { setView("review"); });
         }
@@ -1073,22 +1084,11 @@
 
   $("resetBtn").onclick = function () {
     state.lead = 4; state.jobType = "hotshot"; state.binOn = false; state.price = "480.00";
-    state.expiry = "24"; state.alsoQuotes = true; state.alloc = "approve"; state.approveWin = 30;
-    state.who = "criteria"; state.drivers = "yes"; state.worked = "no"; state.posted = false;
-    $("leadSel").value = "4"; $("binPrice").value = "480.00"; $("expiry").value = "24";
+    state.alsoQuotes = true;
+    state.who = "criteria"; state.posted = false;
+    $("binPrice").value = "480.00"; $("pickFrom").value = "4";
     $("vehSel").value = "18t Curtainsider";
-    $("elecQuotes").checked = true; $("approveWin").value = "30";
-    $("whoCan").querySelector('input[value="criteria"]').checked = true;
-    $("allocMode").querySelector('input[value="approve"]').checked = true;
-    Array.prototype.forEach.call($("jobType").children, function (b) {
-      b.classList.toggle("on", b.dataset.j === state.jobType);
-    });
-    Array.prototype.forEach.call($("ynDrivers").children, function (b) {
-      b.classList.toggle("on", b.dataset.v === state.drivers);
-    });
-    Array.prototype.forEach.call($("ynWorked").children, function (b) {
-      b.classList.toggle("on", b.dataset.v === state.worked);
-    });
+    $("elecQuotes").checked = true;
     renderForm(); setView("post");
   };
 
@@ -1102,11 +1102,13 @@
     hdr.style.cursor = "pointer";
     hdr.addEventListener("click", function (e) {
       var tag = e.target.tagName;
-      if (tag === "A" || tag === "INPUT" || tag === "SELECT") return;
+      if (tag === "A" || tag === "INPUT" || tag === "SELECT" || tag === "BUTTON") return;
       var collapsed = body.classList.toggle("hidden");
       chev.innerHTML = collapsed ? "&#9662;" : "&#9652;";
     });
   });
+
+  window.__sync = renderForm;
 
   renderForm();
   renderLoads();
