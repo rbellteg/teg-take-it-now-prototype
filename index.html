@@ -112,12 +112,12 @@
   .ribbon.dis .rlabel { color: #98a3af; }
   .ribbon.dis .rtag { background: #c2cbd4; color: #fff; }
   .ribbon.dis .plus { color: #b4bcc4; border-color: #d7dde3; }
-  .critwrap { min-height: 208px; }
+  .critwrap { min-height: 300px; }
   .critrows { margin-top: 10px; }
   .critrows.off { display: none; }
-  .crow { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-  .crow label.f { margin: 0; flex: 0 0 175px; }
-  .crow select.inp { max-width: 170px; }
+  .crow { margin-bottom: 11px; }
+  .crow label.f { margin: 0 0 3px; }
+  .crow select.inp { max-width: 240px; }
   .addstop a { font-size: 14px; }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 26px; }
   .grid2 > div { min-width: 0; }
@@ -396,8 +396,8 @@
               <div>
                 <label class="f">Who can Take It Now</label>
                 <div class="minitabs seg wide" id="whoCan">
-                  <button type="button" data-w="criteria" class="on">My criteria</button>
-                  <button type="button" data-w="groups">My groups</button>
+                  <button type="button" data-w="criteria" class="on">Set criteria</button>
+                  <button type="button" data-w="groups">Groups</button>
                   <button type="button" data-w="any">Any member</button>
                 </div>
 
@@ -413,15 +413,15 @@
                   <div class="crow">
                     <label class="f">Positive feedback</label>
                     <select class="inp" id="minPos">
-                      <option>Not applicable</option><option>At least 10</option>
-                      <option selected>At least 25</option><option>At least 100</option>
+                      <option selected>Not applicable</option><option>At least 10</option>
+                      <option>At least 25</option><option>At least 100</option>
                     </select>
                   </div>
                   <div class="crow">
                     <label class="f">Negative feedback</label>
                     <select class="inp" id="maxNeg">
-                      <option>Not applicable</option><option>None</option>
-                      <option selected>Up to 2</option><option>Up to 5</option>
+                      <option selected>Not applicable</option><option>None</option>
+                      <option>Up to 2</option><option>Up to 5</option>
                     </select>
                   </div>
                   <div class="crow">
@@ -431,8 +431,8 @@
                       <option>Up to 1</option><option>Up to 2</option>
                     </select>
                   </div>
-                  <div class="cbx" style="margin-top:10px"><input type="checkbox" id="trustdDrivers" checked><span>Trustd drivers only</span></div>
-                  <div class="cbx" style="margin-top:7px"><input type="checkbox" id="prevTrading"><span>Only members I have worked with before</span></div>
+                  <div class="cbx" style="margin-top:12px"><input type="checkbox" id="trustdDrivers" checked><span>Trustd drivers only</span></div>
+                  <div class="cbx" style="margin-top:8px"><input type="checkbox" id="prevTrading"><span>Only members I have worked with before</span></div>
                 </div>
 
                 <div class="critrows off" id="groupsBox">
@@ -467,13 +467,20 @@
                 </div>
                 <div style="font-weight:bold;font-size:14px;margin:2px 0 14px">Total: £ <span id="binTotal">480.00</span></div>
 
-                <label class="f lbltip" style="margin-top:18px">
-                  <span>Accept quotes on this load</span>
-                  <span class="tip" tabindex="0">
-                    <button class="ic" type="button" aria-label="About accepting quotes">i</button>
-                    <span class="bubble">Allows members to send you quotes for this load.</span>
-                  </span>
-                </label>
+                <div class="hint" style="margin:-6px 0 14px">
+                  Take It Now expires 48 hours before collection.
+                </div>
+
+                <div class="fg" style="max-width:360px">
+                  <label class="f">Allocation</label>
+                  <div class="minitabs seg" id="allocSeg" style="margin-top:2px">
+                    <button type="button" data-a="accept" class="on">Require my approval</button>
+                    <button type="button" data-a="auto">Auto-allocate</button>
+                  </div>
+                  <div class="hint" id="allocHint" style="margin-top:6px"></div>
+                </div>
+
+                <label class="f" style="margin-top:18px">Accept quotes on this load</label>
                 <div class="minitabs seg" id="quotesYN" style="margin-top:2px">
                   <button type="button" data-q="1" class="on">Yes</button>
                   <button type="button" data-q="0">No</button>
@@ -641,14 +648,12 @@
                 <label class="f">Notify all live tracked drivers within</label>
                 <div class="stepper" style="margin-bottom:10px"><button>−</button><input value="30"><button>+</button> <span class="hint">miles of the pick-up</span></div>
               </div>
-              <div class="cbx lockable" id="trackedPrefRow"><input type="checkbox"><span>Tracked Driver Preferred</span></div>
+              <div class="cbx"><input type="checkbox"><span>Tracked Driver Preferred</span></div>
               <div class="cbx lockable" style="margin-top:7px" id="eqRow">
-                <input type="checkbox" id="elecQuotes" checked><span><b>Electronic Quotes</b></span>
+                <input type="checkbox" id="elecQuotes" checked><span>Electronic Quotes</span>
               </div>
               <div class="cbx lockable" style="margin-top:7px" id="spRowN"><input type="checkbox" checked><span>Accept quotes from SmartPay members only</span></div>
               <div class="cbx ind lockable" style="margin-top:7px" id="euRowN"><input type="checkbox" checked><span>Also accept quotes from EU members</span></div>
-              <div class="hint hidden" id="eqLock" style="margin-top:10px">The greyed settings above are controlled by
-                your Take It Now section and cannot be changed here.</div>
             </div>
             <div class="divider-l">
               <div class="infonote">
@@ -767,7 +772,7 @@
   var DAY = 86400000;
   var state = {
     view: "post", lead: 4, jobType: "hotshot", binOn: false, price: "480.00",
-    alsoQuotes: true, who: "criteria", posted: false, step: 1
+    alsoQuotes: true, who: "criteria", alloc: "accept", posted: false, step: 1
   };
 
   function $(id) { return document.getElementById(id); }
@@ -846,6 +851,12 @@
       ? "Members meeting your criteria can take this load at £" + priceNum().toFixed(2) + "." : "";
 
     $("binTotal").textContent = priceNum().toFixed(2);
+    Array.prototype.forEach.call($("allocSeg").children, function (b) {
+      b.classList.toggle("on", b.dataset.a === state.alloc);
+    });
+    $("allocHint").textContent = state.alloc === "accept"
+      ? "You have one hour to approve/decline a member who takes the load."
+      : "Allocated as soon as an eligible member takes it.";
     Array.prototype.forEach.call($("quotesYN").children, function (b) {
       b.classList.toggle("on", (b.dataset.q === "1") === state.alsoQuotes);
     });
@@ -865,11 +876,10 @@
       $("spRowN").querySelector("input").checked = state.alsoQuotes && $("spOnly").checked;
       $("euRowN").querySelector("input").checked = state.alsoQuotes && $("euQuotes").checked;
     }
-    ["advertiseRow", "trackedPrefRow", "eqRow", "spRowN", "euRowN"].forEach(function (id) {
+    ["advertiseRow", "eqRow", "spRowN", "euRowN"].forEach(function (id) {
       $(id).classList.toggle("lock", state.binOn);
     });
     $("trackedRow").classList.toggle("lock", state.binOn && !state.alsoQuotes);
-    $("eqLock").classList.toggle("hidden", !state.binOn);
     $("notifyNote").textContent = state.binOn
       ? "Some settings are controlled by your Take It Now section."
       : "";
@@ -889,6 +899,9 @@
   $("binPrice").oninput = function () { state.price = this.value; renderForm(); };
   Array.prototype.forEach.call($("quotesYN").children, function (b) {
     b.onclick = function () { state.alsoQuotes = b.dataset.q === "1"; renderForm(); };
+  });
+  Array.prototype.forEach.call($("allocSeg").children, function (b) {
+    b.onclick = function () { state.alloc = b.dataset.a; renderForm(); };
   });
   $("pickFrom").onchange = function () { state.lead = Number(this.value); renderForm(); renderLoads(); };
   $("vehSel").onchange = function () { renderForm(); renderLoads(); };
@@ -985,7 +998,7 @@
   function renderSheet() {
     var price = sheetSelf ? priceNum() : 720;
     var lane = sheetSelf ? "Nuneaton CV11 → Leeds LS10" : "Coventry CV6 → Carlisle CA1";
-    var approves = false;
+    var approves = sheetSelf ? state.alloc === "accept" : false;
     var steps = $("sheetSteps").children, idx = [0, 2, 4, 6];
     Array.prototype.forEach.call(steps, function (s) { s.classList.remove("on"); });
     steps[idx[state.step - 1]].classList.add("on");
@@ -1087,6 +1100,7 @@
     state.alsoQuotes = true;
     state.who = "criteria"; state.posted = false;
     $("binPrice").value = "480.00"; $("pickFrom").value = "4";
+    state.alloc = "accept";
     $("vehSel").value = "18t Curtainsider";
     $("elecQuotes").checked = true;
     renderForm(); setView("post");
