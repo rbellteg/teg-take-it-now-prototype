@@ -467,8 +467,15 @@
                 </div>
                 <div style="font-weight:bold;font-size:14px;margin:2px 0 14px">Total: £ <span id="binTotal">480.00</span></div>
 
-                <div class="hint" style="margin:-6px 0 14px">
-                  Take It Now expires 48 hours before collection.
+                <div class="fg" id="expiryRow" style="max-width:260px;margin-top:-4px">
+                  <label class="f">Take It Now expires</label>
+                  <select class="inp" id="expiry">
+                    <option value="none">Until the load expires</option>
+                    <option value="1">1 day before collection</option>
+                    <option value="2" selected>2 days before collection</option>
+                    <option value="3">3 days before collection</option>
+                  </select>
+                  <div class="hint" id="expiryHint"></div>
                 </div>
 
                 <div class="fg" style="max-width:360px">
@@ -772,7 +779,7 @@
   var DAY = 86400000;
   var state = {
     view: "post", lead: 4, jobType: "hotshot", binOn: false, price: "480.00",
-    alsoQuotes: true, who: "criteria", alloc: "accept", posted: false, step: 1
+    alsoQuotes: true, who: "criteria", alloc: "accept", expiry: "2", posted: false, step: 1
   };
 
   function $(id) { return document.getElementById(id); }
@@ -851,6 +858,11 @@
       ? "Members meeting your criteria can take this load at £" + priceNum().toFixed(2) + "." : "";
 
     $("binTotal").textContent = priceNum().toFixed(2);
+    $("expiryHint").textContent = state.expiry === "none"
+      ? "Available at your rate while the load is live."
+      : state.alsoQuotes
+        ? "After this, the load can only be quoted on."
+        : "After this, the load is cancelled.";
     Array.prototype.forEach.call($("allocSeg").children, function (b) {
       b.classList.toggle("on", b.dataset.a === state.alloc);
     });
@@ -903,6 +915,7 @@
   Array.prototype.forEach.call($("allocSeg").children, function (b) {
     b.onclick = function () { state.alloc = b.dataset.a; renderForm(); };
   });
+  $("expiry").onchange = function () { state.expiry = this.value; renderForm(); };
   $("pickFrom").onchange = function () { state.lead = Number(this.value); renderForm(); renderLoads(); };
   $("vehSel").onchange = function () { renderForm(); renderLoads(); };
   Array.prototype.forEach.call($("whoCan").children, function (b) {
@@ -1100,7 +1113,8 @@
     state.alsoQuotes = true;
     state.who = "criteria"; state.posted = false;
     $("binPrice").value = "480.00"; $("pickFrom").value = "4";
-    state.alloc = "accept";
+    state.alloc = "accept"; state.expiry = "2";
+    $("expiry").value = "2";
     $("vehSel").value = "18t Curtainsider";
     $("elecQuotes").checked = true;
     renderForm(); setView("post");
