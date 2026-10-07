@@ -54,6 +54,9 @@
   }
 
   .stage { padding: 18px 14px 60px; display: flex; justify-content: center; }
+  .stagewrap { width: 100%; max-width: 900px; }
+  body.wide .stage { padding: 14px 10px 40px; display: block; }
+  body.wide .stagewrap { max-width: none; overflow-x: auto; }
   .modal {
     width: 100%; max-width: 880px; background: #fff; border: 1px solid #c9d3dd;
     border-radius: 3px; box-shadow: 0 8px 30px rgba(20,40,70,.18);
@@ -238,24 +241,152 @@
   }
   .price { font-size: 17px; font-weight: bold; color: #24405c; }
 
-  /* ---------- carrier board ---------- */
-  .board { width: 100%; max-width: 980px; background: #fff; border: 1px solid #c9d3dd; border-radius: 3px; }
-  .bhead { padding: 12px 16px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 12px; }
-  .bhead h2 { margin: 0; font-size: 17px; }
-  .bhead .count { color: var(--mute); font-size: 12px; }
-  .filters { display: flex; gap: 8px; padding: 10px 16px; background: #f7f9fb; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
-  .chip { border: 1px solid #c4ccd4; background: #fff; border-radius: 12px; padding: 3px 10px; font-size: 11.5px; }
-  .chip.on { border-color: var(--blue); background: var(--blue-l); color: var(--blue-d); font-weight: bold; }
-  .row-load { display: flex; gap: 14px; align-items: center; padding: 12px 16px; border-bottom: 1px solid #eaeff4; }
-  .row-load.bin { border-left: 4px solid var(--amber); background: #fffdf6; }
-  .row-load .lane { font-weight: bold; }
-  .row-load .sub2 { color: var(--mute); font-size: 11.5px; margin-top: 3px; }
-  .row-load .act { margin-left: auto; text-align: right; display: flex; flex-direction: column; gap: 5px; align-items: flex-end; }
-  .grp {
-    padding: 8px 16px; background: #f2f6fa; font-size: 11.5px; font-weight: bold; color: #46596d;
-    text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid var(--line);
+  /* ---------- carrier loads screen (matches live HX) ---------- */
+  .hxapp { display: flex; min-width: 1500px; background: #fff; border: 1px solid #c9d3dd; }
+  .hxrail { flex: 0 0 56px; background: #2f3b45; padding: 10px 0; }
+  .hxrail .logo {
+    background: #1f2a33; color: #fff; font-weight: bold; font-size: 13px; text-align: center; padding: 8px 0;
   }
-  .lead { font-size: 11.5px; color: #46596d; background: #eef2f6; border-radius: 10px; padding: 2px 8px; }
+  .hxrail .ico { height: 34px; margin-top: 10px; }
+  .hxrail .ico.on { background: #f5c400; }
+  .hxmain { flex: 1; min-width: 0; }
+  .hxtop { display: flex; align-items: center; gap: 12px; padding: 12px 16px 6px; }
+  .hxtop .hxlogo { font-size: 21px; color: #5b6b7b; }
+  .hx-post { background: #f5c400; border: 0; color: #1f2d3a; font-weight: bold; padding: 9px 20px; border-radius: 3px; font-size: 12.5px; letter-spacing: .5px; }
+  .hx-book { background: #2f3b45; border: 0; color: #fff; font-weight: bold; padding: 9px 20px; border-radius: 3px; font-size: 12.5px; letter-spacing: .5px; }
+  .hxtop .sp { margin-left: auto; }
+  .hxacct { text-align: right; padding: 0 16px 8px; font-size: 12px; color: #4a5a68; }
+  .hxnav {
+    display: flex; gap: 18px; justify-content: center; padding: 6px 16px 0; border-bottom: 1px solid #e3e9ef;
+    flex-wrap: wrap;
+  }
+  .hxnav span {
+    font-size: 11.5px; letter-spacing: .6px; color: #5b6b7b; padding-bottom: 8px; border-bottom: 2px solid transparent;
+  }
+  .hxnav span.on { color: #1f2d3a; border-bottom-color: #4a5a68; }
+  .hxbody { display: flex; gap: 10px; padding: 10px; background: #fff; align-items: flex-start; }
+  .hxleft { flex: 0 0 246px; }
+  .greenbtn {
+    display: block; width: 100%; background: #5cb85c; border: 1px solid #4a9d4a; color: #fff; font-weight: bold;
+    text-align: left; padding: 9px 12px; border-radius: 3px; margin-bottom: 7px; font-size: 13.5px;
+  }
+  .scard { border: 1px solid #d7dfe6; border-radius: 3px; }
+  .sch { padding: 9px 11px; font-size: 15px; font-weight: bold; color: #4a5a68; border-bottom: 1px solid #e3e9ef; }
+  .sbody { padding: 10px 12px; font-size: 12.5px; }
+  .sbody label.f { margin-top: 8px; font-size: 12px; }
+  .sbody .inp { font-size: 12px; padding: 4px 6px; }
+  .hxright { flex: 1; min-width: 0; }
+  .rhead {
+    display: flex; align-items: center; gap: 12px; padding: 9px 12px; border: 1px solid #d7dfe6;
+    border-bottom: 0; font-size: 13.5px; flex-wrap: wrap;
+  }
+  .rhead .rad { font-size: 12px; color: #44525f; display: flex; align-items: center; gap: 4px; }
+  .rfilters {
+    display: flex; align-items: center; gap: 10px; padding: 0 12px; border: 1px solid #d7dfe6;
+    background: #fff; flex-wrap: wrap;
+  }
+  .rfilters .tab {
+    border: 0; background: none; color: var(--blue); font-size: 12.5px; padding: 9px 14px;
+    border-bottom: 3px solid transparent;
+  }
+  .rfilters .tab.on { color: #1f2d3a; font-weight: bold; border-bottom-color: #1a7bc9; }
+  .rfilters .sm { font-size: 12px; color: #44525f; }
+  .rfilters select.inp { font-size: 12px; padding: 3px 5px; width: auto; }
+
+  .loadrow { border: 1px solid #cfe0f0; margin: 10px 0 0; }
+  .lr-top { display: grid; grid-template-columns: 1fr 1.25fr 1.15fr; }
+  .lr-ship, .lr-when { padding: 11px 13px; font-size: 13px; }
+  .lr-ship div, .lr-when div { margin-bottom: 5px; }
+  .lr-ship .lbl, .lr-when .lbl { color: #44525f; display: inline-block; min-width: 54px; }
+  .lr-side { border-left: 1px solid #e3ebf3; }
+  .jobtypebar { background: #ddeefc; padding: 5px 10px; text-align: center; font-weight: bold; color: #2b4f74; font-size: 13.5px; }
+  .sidebody { padding: 8px 11px; position: relative; }
+  .postedby { font-weight: bold; font-size: 13.5px; color: #44525f; }
+  .vehtag { position: absolute; right: 11px; top: 10px; text-align: center; font-size: 11px; color: #44525f; }
+  .lr-mid { display: grid; grid-template-columns: 1fr 1.25fr 1.15fr; }
+  .lr-mid > div { padding: 9px 13px; font-size: 12.5px; }
+  .lr-mid .lr-right { border-left: 1px solid #e3ebf3; }
+  .kvl { display: flex; margin-bottom: 3px; }
+  .kvl span:first-child { color: #1a7bc9; flex: 0 0 108px; }
+  .kvl b { font-weight: bold; }
+  .smartpay { color: #3d8b3d; font-weight: bold; font-size: 12px; margin-top: 2px; }
+  .lr-notes { padding: 7px 13px; font-size: 12.5px; color: #44525f; font-style: italic; }
+  .lr-foot { display: flex; align-items: center; gap: 12px; padding: 7px 13px; border-top: 1px solid #e3ebf3; }
+  .lr-foot .right { margin-left: auto; font-size: 12.5px; color: #44525f; }
+  .lr-foot .right a { text-decoration: underline; }
+  .btn-quote { background: #5cb85c; border: 1px solid #4a9d4a; color: #fff; font-weight: bold; padding: 7px 26px; border-radius: 2px; font-size: 13px; }
+  .btn-tin { background: #f5c400; border: 1px solid #d9ae00; color: #1f2d3a; font-weight: bold; padding: 7px 18px; border-radius: 2px; font-size: 13px; }
+  .backloadtag { color: #d2762a; font-weight: bold; font-size: 12.5px; }
+  .tinflag { color: #8a6b00; font-weight: bold; font-size: 12.5px; }
+
+  .hxads { flex: 0 0 150px; padding: 10px 10px 10px 0; }
+  .adbtn {
+    display: flex; align-items: center; gap: 8px; color: #fff; font-weight: bold; font-size: 14px;
+    padding: 9px 11px; border-radius: 3px; margin-bottom: 8px;
+  }
+  .adbtn.y { background: #f5c400; color: #1f2d3a; }
+  .adbtn.b { background: #2f86d6; }
+  .adbox {
+    border: 1px solid #e3e9ef; border-radius: 3px; height: 92px; margin-bottom: 8px; display: flex;
+    align-items: center; justify-content: center; color: #9aa7b4; font-size: 11px; text-align: center; padding: 6px;
+  }
+  .adbox.dark { background: #1f2a33; color: #cfd8e0; }
+  .diaryrow { border: 2px solid #e8a33d; }
+  .statusbar { padding: 5px 10px; text-align: center; font-weight: bold; font-size: 13.5px; }
+  .statusbar.green { background: #8dc63f; color: #fff; }
+  .statusbar.amber { background: #f5c400; color: #1f2d3a; }
+  .tinbadge {
+    background: #f5c400; color: #1f2d3a; font-size: 9px; font-weight: bold; padding: 2px 5px;
+    border-radius: 2px; margin-left: 6px; letter-spacing: .3px;
+  }
+  .qtbl { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .qtbl th {
+    background: #e8f1fa; color: #44525f; font-weight: bold; text-align: left; padding: 8px 9px;
+    border-bottom: 1px solid #d7e3ee; white-space: nowrap;
+  }
+  .qtbl td { padding: 9px; border-bottom: 1px solid #eef2f6; }
+  .qtbl tr.quoterow { background: #eaf6ea; }
+  .qtbl tr.tinrow { background: #fffaea; }
+  .qtbl tr.tinrow td { border-top: 2px solid #f5c400; border-bottom: 0; }
+  .qtbl tr.tinnote td { background: #fffaea; border-bottom: 2px solid #f5c400; padding-top: 0; color: #6b5200; }
+  .qtbl a { text-decoration: underline; }
+  .btn-approve { background: #5cb85c; border: 1px solid #4a9d4a; color: #fff; font-weight: bold; padding: 5px 14px; border-radius: 2px; font-size: 12px; }
+  .btn-decline { background: #fff; border: 1px solid #c4ccd4; color: #44525f; padding: 5px 12px; border-radius: 2px; font-size: 12px; }
+  .qfoot { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: #f7f9fb; font-size: 12.5px; }
+  .statusgrey { background: #c9ced3; color: #1f2d3a; padding: 5px 10px; text-align: center; font-weight: bold; font-size: 13.5px; }
+  .tinstrip { border-top: 1px solid #e3e9ef; margin-top: 12px; padding-top: 10px; }
+  .tinexp { color: #1f2d3a; font-size: 12.5px; }
+  .pager { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #44525f; }
+  .pager button { border: 1px solid #c4ccd4; background: #fff; width: 22px; height: 20px; border-radius: 2px; color: #2f86d6; }
+  .collapsetab {
+    width: 26px; height: 20px; border: 1px solid #d7dfe6; background: #f4f6f8; color: #7b8ca0;
+    border-radius: 2px; font-size: 10px;
+  }
+
+  /* quote modal, matching the live one */
+  .qbox { border: 1px solid #d7dfe6; border-radius: 2px; margin-bottom: 10px; }
+  .qbox .qhead { display: flex; gap: 12px; padding: 11px 13px; align-items: flex-start; }
+  .qlogo {
+    width: 68px; height: 68px; border-radius: 50%; background: #f1f4f7; color: #9aa7b4; font-size: 9px;
+    display: flex; align-items: center; justify-content: center; text-align: center; flex: 0 0 68px;
+  }
+  .qrow { display: flex; gap: 10px; padding: 9px 13px; border-top: 1px solid #e8edf2; font-size: 13px; align-items: baseline; }
+  .qrow .qlab { flex: 0 0 60px; font-weight: bold; color: #44525f; }
+  .qrow .qtime { margin-left: auto; color: #8a97a4; font-size: 12px; }
+  .qline { display: flex; align-items: center; gap: 12px; padding: 10px 2px; }
+  .qline .ql { flex: 1; font-size: 13px; color: #44525f; }
+  .qtotal { text-align: center; font-size: 26px; margin: 10px 0 14px; }
+  .qtotal b { font-size: 34px; }
+  .tinband {
+    background: #fff8dd; border: 1px solid #efd97a; border-radius: 2px; padding: 11px 13px;
+    display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+  }
+  .tinband .tt { font-weight: bold; font-size: 14px; color: #6b5200; }
+  .orline { text-align: center; color: #9aa7b4; font-size: 12px; margin: 2px 0 12px; }
+  .footerprev {
+    border: 1px solid #e3e9ef; background: #fafbfc; border-radius: 2px; padding: 10px 12px;
+    font-size: 12px; color: #44525f; line-height: 1.5; margin-top: 4px;
+  }
 
   /* ---------- overlay ---------- */
   .overlay {
@@ -309,16 +440,18 @@
   <div class="brand">HX Take It Now <span>clickable prototype · v0.3</span></div>
   <div class="segs" id="segs">
     <button data-v="post" class="on">1 · Post Load</button>
-    <button data-v="carrier" class="soon" data-soon="1" title="Coming soon">2 · Carrier view</button>
-    <button data-v="review" class="soon" data-soon="1" title="Coming soon">3 · Acceptance</button>
+    <button data-v="carrier">2 · Carrier view</button>
+    <button data-v="review">3 · Diary (carrier)</button>
+    <button data-v="quotes">4 · Quotes (poster)</button>
   </div>
   <div class="right">
+    <button class="ghost on" id="eligBtn">Carrier meets criteria: yes</button>
     <button class="ghost" id="resetBtn">Reset</button>
   </div>
 </div>
 
 <div class="stage">
-  <div style="width:100%;max-width:900px">
+  <div class="stagewrap" id="stagewrap">
 
 
     <!-- =============================== POST LOAD =============================== -->
@@ -684,71 +817,419 @@
 
     <!-- =============================== CARRIER =============================== -->
     <div id="view-carrier" class="hidden">
-      <div class="board">
-        <div class="bhead">
-          <h2>Available loads</h2>
-          <span class="count">CV11 · 35 mile radius · next 7 days</span>
+      <div class="hxapp">
+        <div class="hxrail">
+          <div class="logo">HX</div>
+          <div class="ico on"></div><div class="ico"></div><div class="ico"></div><div class="ico"></div>
         </div>
-        <div class="filters" id="carFilters">
-          <button class="chip on" data-f="all">All loads</button>
-          <button class="chip" data-f="bin">Take It Now</button>
-          <button class="chip" data-f="std">Quote only</button>
-          <button class="chip" data-f="fleet">Matches my fleet</button>
+
+        <div class="hxmain">
+          <div class="hxtop">
+            <div class="hxlogo">Haulage Exchange</div>
+            <span class="sp"></span>
+            <button class="hx-post">POST LOAD</button>
+            <button class="hx-book">BOOK DIRECT</button>
+          </div>
+          <div class="hxacct">Current Account: TEG – Customer Services – GB 101865 &#9662;</div>
+          <div class="hxnav">
+            <span>DASHBOARD</span><span>DIRECTORY</span><span>LIVE AVAILABILITY</span><span>MY FLEET</span>
+            <span>RETURN JOURNEYS</span><span class="on">LOADS</span><span>QUOTES</span><span>DIARY</span>
+            <span>FREIGHT VISION</span><span>DRIVERS &amp; VEHICLES</span>
+          </div>
+
+          <div class="hxbody">
+            <div class="hxleft">
+              <button class="greenbtn">&#43;&nbsp; Post Load</button>
+              <button class="greenbtn">&#9654;&nbsp; Book Direct</button>
+              <div class="scard">
+                <div class="sch">&#128269;&nbsp; Search Loads</div>
+                <div class="sbody">
+                  <div class="cbx"><input type="checkbox"><span>Save as Default</span></div>
+                  <label class="f">FROM:</label>
+                  <input class="inp" value="Leeds, GB">
+                  <label class="f">Radius Search:</label>
+                  <select class="inp" style="max-width:88px"><option>50</option></select>
+                  <label class="f">TO:</label>
+                  <input class="inp" placeholder="Enter Location">
+                  <label class="f">Body Type:</label>
+                  <select class="inp"><option></option><option>Curtain Side</option></select>
+                  <label class="f">Date:</label>
+                  <select class="inp"><option>Anytime</option></select>
+                  <label class="f">Freight Type:</label>
+                  <select class="inp"><option></option></select>
+                  <label class="f">Member Name / ID:</label>
+                  <input class="inp">
+                  <label class="f">Job Description:</label>
+                  <div class="cbx" style="margin-top:5px"><input type="checkbox" checked><span>Same Day – Timed</span></div>
+                  <div class="cbx" style="margin-top:4px"><input type="checkbox" checked><span>Next Day – Timed</span></div>
+                  <div class="cbx" style="margin-top:4px"><input type="checkbox" checked><span>3 – 5 Days</span></div>
+
+                  <div class="tinstrip" id="tinFilterBox">
+                    <div class="cbx"><input type="checkbox" id="tinOnly"><span><b>Take It Now</b> only</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hxright">
+              <div class="rhead">
+                <span>&#128197;</span><span>Search Loads Results at 13:47 BST</span>
+                <span class="rad"><input type="radio" name="vw" checked> List View</span>
+                <span class="rad"><input type="radio" name="vw"> Interactive Freight Radar Map</span>
+                <span style="margin-left:auto"><a href="#" onclick="return false">Collapse All Entries</a></span>
+                <button class="btn" style="padding:3px 12px;font-size:12px">Refresh</button>
+              </div>
+              <div class="rfilters">
+                <button class="tab on">All Live</button><button class="tab">On Demand</button>
+                <button class="tab">Regular Load</button><button class="tab">Daily Hire</button>
+                <select class="inp"><option>Quick Search</option></select>
+                <span class="sm">Show loads posted within last</span>
+                <select class="inp"><option>all</option></select>
+                <span class="cbx sm"><input type="checkbox"><span>Inc Sold</span></span>
+                <span class="pager" style="margin-left:auto">
+                  <select class="inp"><option>10</option><option>25</option></select>
+                  <button>&#9668;&#9668;</button><button>&#9668;</button>
+                  <span id="resCount"></span>
+                  <button>&#9658;</button><button>&#9658;&#9658;</button>
+                </span>
+              </div>
+              <div id="loadList"></div>
+            </div>
+
+            <div class="hxads">
+              <div class="adbtn y">&#8594;&nbsp; Deals</div>
+              <div class="adbtn b">&#8594;&nbsp; Need insurance?</div>
+              <div class="adbox dark">Refer friends.<br>Get rewards.</div>
+              <div class="adbox">WEBFLEET<br><span style="font-size:10px">Vehicle Tracking</span></div>
+              <div class="adbox">TELETRAC NAVMAN<br><span style="font-size:10px">Vehicle Tracking</span></div>
+              <div class="adbox">BUSINESS CHOICE DIRECT<br><span style="font-size:10px">Insurance</span></div>
+            </div>
+          </div>
         </div>
-        <div id="loadList"></div>
       </div>
     </div>
 
-    <!-- =============================== REVIEW =============================== -->
+    <!-- =============================== DIARY =============================== -->
     <div id="view-review" class="hidden">
-      <div class="modal" style="max-width:680px">
-        <div class="mhead" style="position:static">
-          <div>
-            <div class="newpill">Action needed</div>
-            <div class="mtitle">Take It Now acceptance</div>
-          </div>
-          <div class="headright"><div class="opt" id="countdown" style="font-weight:bold">Approve within 29:41</div></div>
+      <div class="hxapp">
+        <div class="hxrail">
+          <div class="logo">HX</div>
+          <div class="ico on"></div><div class="ico"></div><div class="ico"></div><div class="ico"></div>
         </div>
-        <div class="sec-hdr"><h3>Load 4471902 · Nuneaton CV11 → Leeds LS10</h3></div>
-        <div class="sec-body">
-          <div class="kv">Collection <b id="revPick"></b></div>
-          <div class="kv">Your Take It Now price <b id="revPrice">£480.00</b></div>
-          <div class="kv">Accepted <b>2 minutes ago</b></div>
 
-          <h4 style="margin:16px 0 8px">Who accepted</h4>
-          <div class="carriercard">
-            <div class="nm">Simon Willitts Transport Limited <span class="binbadge" style="background:#dff0d8;color:#2f6b2f">TRUSTD</span></div>
-            <div class="hint">Member GB 77100 · Wakefield WF2 · 14 vehicles</div>
-            <div class="sig">
-              <div><span>Feedback</span><span class="stars">★★★★★</span> 4.8 from 63 loads</div>
-              <div><span>Loads completed with TEG</span>412 · 6 in the last 30 days</div>
-              <div><span>Delivered on time</span>96% (last 12 months)</div>
-              <div><span>Load tracking</span>High — app tracked on 94% of loads</div>
-              <div><span>Member since</span>March 2016 — 9 years</div>
-              <div><span>Verified drivers</span><span class="verify">✓ Yes — all 14 drivers verified</span></div>
-              <div><span>Goods in transit</span><span class="verify">✓ £250,000 verified, in date</span></div>
-              <div><span>Cancellation rate</span>2% — 1 in last 50 loads</div>
-              <div><span>Vehicle offered</span>18t Curtainsider · YJ19 KTX</div>
-              <div><span>Worked with you before</span>Yes — 3 loads, most recent Jul 2026</div>
+        <div class="hxmain">
+          <div class="hxtop">
+            <div class="hxlogo">Haulage Exchange</div>
+            <span class="sp"></span>
+            <button class="hx-post">POST LOAD</button>
+            <button class="hx-book">BOOK DIRECT</button>
+          </div>
+          <div class="hxacct">Current Account: Quickline Haulage Limited – GB 77100 &#9662;</div>
+          <div class="hxnav">
+            <span>DASHBOARD</span><span>DIRECTORY</span><span>LIVE AVAILABILITY</span><span>MY FLEET</span>
+            <span>RETURN JOURNEYS</span><span>LOADS</span><span>QUOTES</span><span class="on">DIARY</span>
+            <span>CALENDAR</span><span>FREIGHT VISION</span><span>DRIVERS &amp; VEHICLES</span>
+          </div>
+
+          <div class="hxbody">
+            <div class="hxleft">
+              <button class="greenbtn">&#43;&nbsp; Post Load</button>
+              <button class="greenbtn">&#9654;&nbsp; Book Direct</button>
+              <div class="scard" style="margin-bottom:8px"><div class="sch">&#128100;&nbsp; Contacts</div></div>
+              <div class="scard" style="margin-bottom:8px"><div class="sch">Payment Report</div></div>
+              <div class="scard">
+                <div class="sch">&#128269;&nbsp; Search Panel</div>
+                <div class="sbody">
+                  <div class="cbx"><input type="radio" name="dq"><span>All</span></div>
+                  <div class="cbx" style="margin-top:4px"><input type="radio" name="dq"><span>Jobs Sub-contracted</span></div>
+                  <div class="cbx" style="margin-top:4px"><input type="radio" name="dq" checked><span>Our Bookings</span></div>
+                  <label class="f">Date:</label>
+                  <select class="inp"><option>Anytime</option></select>
+                  <label class="f">Pickup Time Within:</label>
+                  <select class="inp"><option>Any</option></select>
+                  <label class="f">Load ID / Ref:</label>
+                  <input class="inp">
+                  <label class="f">Member / Driver:</label>
+                  <input class="inp">
+                </div>
+              </div>
+            </div>
+
+            <div class="hxright">
+              <div class="rhead">
+                <span>&#128197;</span><span>Diary at 17:48 BST</span>
+                <span class="rad"><input type="radio" name="dv" checked> List View</span>
+                <span class="rad"><input type="radio" name="dv"> Split View</span>
+                <span style="margin-left:auto"><a href="#" onclick="return false">Collapse All Entries</a></span>
+                <button class="btn" style="padding:3px 12px;font-size:12px">Refresh</button>
+              </div>
+              <div class="rfilters">
+                <button class="tab">All</button><button class="tab">Allocated</button>
+                <button class="tab on">In Progress</button><button class="tab">Completed</button>
+                <button class="tab">Cancelled</button><button class="tab">Awaiting Feedback</button>
+                <span class="pager" style="margin-left:auto">
+                  <span class="sm">Items per Page:</span>
+                  <select class="inp"><option>10</option></select>
+                  <button>&#9668;&#9668;</button><button>&#9668;</button><span>1-2 of 2</span>
+                  <button>&#9658;</button><button>&#9658;&#9658;</button>
+                </span>
+              </div>
+
+              <!-- pending approval -->
+              <div class="loadrow diaryrow">
+                <div class="lr-top">
+                  <div class="lr-ship">
+                    <div><span class="lbl">From:</span> <b>LEEDS</b>, LS10</div>
+                    <div><span class="lbl">To:</span> <b>BRISTOL</b>, BS11</div>
+                  </div>
+                  <div class="lr-when">
+                    <div><span class="lbl">Pickup:</span> <b>08:00 – 12:00 09/10/2026</b></div>
+                    <div><span class="lbl">Deliver:</span> <b>By 16:00 10/10/2026</b></div>
+                  </div>
+                  <div class="lr-side">
+                    <div class="statusbar amber">Take It Now - Pending Approval</div>
+                    <div class="sidebody">
+                      <div class="postedby" style="color:#8a6b00">Submitted by You</div>
+                      <div class="hint">@ 17:46 (BST) 06/10/2026</div>
+                      <div style="margin-top:5px;font-size:12.5px">Load ID: &nbsp;<b>89821274</b></div>
+                      <div class="vehtag">&#128667;<br>Artic</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="lr-mid">
+                  <div>
+                    <div class="kvl"><span>Load poster:</span><b>Menzies Distribution</b></div>
+                    <div class="kvl"><span>Rate (£):</span><b>640.00</b></div>
+                  </div>
+                  <div>
+                    <div class="kvl"><span>Dist:</span><b>212.4 miles</b></div>
+                    <div class="kvl"><span>Weight:</span><b>18,200 kg</b></div>
+                  </div>
+                  <div class="lr-right">
+                    <div class="kvl"><span>Requested:</span><b>Artic, Curtain Side</b></div>
+                    <div class="kvl"><span>Payment Terms:</span><b>30 Days (End Of Month)</b></div>
+                    <div class="smartpay">&pound; SmartPay Enabled</div>
+                  </div>
+                </div>
+                <div class="lr-notes" style="font-style:normal;color:#8a6b00">
+                  <b>Held for you until 18:46 BST.</b> Menzies Distribution has one hour to approve or decline.
+                  No other member can take this load in that time. You will be notified either way.
+                </div>
+                <div class="lr-foot">
+                  <button class="collapsetab">&#9650;</button>
+                  <button class="btn" id="withdrawBtn">Withdraw</button>
+                  <span class="right">Allocated To: <b>Not yet allocated</b></span>
+                </div>
+              </div>
+
+              <!-- approved -->
+              <div class="loadrow diaryrow">
+                <div class="lr-top">
+                  <div class="lr-ship">
+                    <div><span class="lbl">From:</span> <b>NUNEATON</b>, CV11</div>
+                    <div><span class="lbl">To:</span> <b>LEEDS</b>, LS10</div>
+                  </div>
+                  <div class="lr-when">
+                    <div><span class="lbl">Pickup:</span> <b>08:00 – 12:00 10/10/2026</b></div>
+                    <div><span class="lbl">Deliver:</span> <b>ASAP 11/10/2026</b></div>
+                  </div>
+                  <div class="lr-side">
+                    <div class="statusbar green">Take It Now - Allocated</div>
+                    <div class="sidebody">
+                      <div class="postedby">Booked by You</div>
+                      <div class="hint">@ 16:12 (BST) 06/10/2026</div>
+                      <div style="margin-top:5px;font-size:12.5px">Load ID: &nbsp;<b>89821268</b></div>
+                      <div class="vehtag">&#128667;<br>18t</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="lr-mid">
+                  <div>
+                    <div class="kvl"><span>Load poster:</span><b>Hartwell Distribution Ltd</b></div>
+                    <div class="kvl"><span>Phone:</span><b>+44 2476 334 112</b></div>
+                    <div class="kvl"><span>Agreed Rate (£):</span><b>480.00</b></div>
+                  </div>
+                  <div>
+                    <div class="kvl"><span>Dist:</span><b>118.0 miles</b></div>
+                    <div class="kvl"><span>Weight:</span><b>8,400 kg</b></div>
+                    <div class="kvl"><span>Packaging:</span><b>12 Pallets</b></div>
+                  </div>
+                  <div class="lr-right">
+                    <div class="kvl"><span>Requested:</span><b>18t Curtainsider</b></div>
+                    <div class="kvl"><span>Vehicle Ref:</span><b>YJ19 KTX</b></div>
+                    <div class="kvl"><span>Payment Terms:</span><b>30 Days (End Of Month)</b></div>
+                    <div class="kvl"><span>Hard copy POD:</span><b>Not Required</b></div>
+                    <div class="smartpay">&pound; SmartPay Enabled</div>
+                  </div>
+                </div>
+                <div class="lr-notes">Load Notes: &nbsp;Bermuda Park. Forklift on site.</div>
+                <div class="lr-foot">
+                  <button class="collapsetab">&#9650;</button>
+                  <button class="btn-quote" style="padding:7px 18px">On Site (Pickup) &#94;</button>
+                  <button class="btn">Order</button><button class="btn">Notes</button>
+                  <button class="btn">History</button><button class="btn">Documents</button>
+                  <span class="right">Allocated To: <b>Mark Ellison</b>, YJ19 KTX +44 7700 900 412</span>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="hxads">
+              <div class="adbtn y">&#8594;&nbsp; Deals</div>
+              <div class="adbtn b">&#8594;&nbsp; Need insurance?</div>
+              <div class="adbox dark">Refer friends.<br>Get rewards.</div>
+              <div class="adbox">TELETRAC NAVMAN<br><span style="font-size:10px">Vehicle Tracking</span></div>
+              <div class="adbox">WEBFLEET<br><span style="font-size:10px">Vehicle Tracking</span></div>
             </div>
           </div>
-
-          <h4 style="margin:16px 0 8px">Quotes also received</h4>
-          <div class="quotelist">
-            <div class="q"><span>Pennine Freight Ltd · <span class="stars">★★★</span> 3.2 · 14 loads</span><span class="amt">£455.00</span></div>
-            <div class="q"><span>FC Transport Leeds Limited · <span class="stars">★★★★★</span> 4.6 · 188 loads</span><span class="amt">£492.00</span></div>
-          </div>
-          <div class="banner warn" style="margin-top:10px">
-            <span>⚠</span>
-            <div><b>One quote is £25 below your Take It Now price.</b>
-              Declining this acceptance puts the load back on the market and the member who accepted may not return.</div>
-          </div>
         </div>
-        <div class="mfoot" style="position:static">
-          <span class="req">Declining is recorded against your Take It Now reliability</span>
-          <button class="btn" id="declineBtn">Decline</button>
-          <button class="btn">Message member</button>
-          <button class="btn btn-green" id="confirmBtn">Approve booking</button>
+      </div>
+    </div>
+
+    <!-- =============================== QUOTES (POSTER) =============================== -->
+    <div id="view-quotes" class="hidden">
+      <div class="hxapp">
+        <div class="hxrail">
+          <div class="logo">HX</div>
+          <div class="ico on"></div><div class="ico"></div><div class="ico"></div><div class="ico"></div>
+        </div>
+        <div class="hxmain">
+          <div class="hxtop">
+            <div class="hxlogo">Haulage Exchange</div>
+            <span class="sp"></span>
+            <button class="hx-post">POST LOAD</button>
+            <button class="hx-book">BOOK DIRECT</button>
+          </div>
+          <div class="hxacct">Current Account: Hartwell Distribution Ltd – GB 88241 &#9662;</div>
+          <div class="hxnav">
+            <span>DASHBOARD</span><span>DIRECTORY</span><span>LIVE AVAILABILITY</span><span>MY FLEET</span>
+            <span>RETURN JOURNEYS</span><span>LOADS</span><span class="on">QUOTES</span><span>DIARY</span>
+            <span>CALENDAR</span><span>FREIGHT VISION</span><span>DRIVERS &amp; VEHICLES</span>
+          </div>
+
+          <div class="hxbody">
+            <div class="hxleft">
+              <button class="greenbtn">&#43;&nbsp; Post Load</button>
+              <button class="greenbtn">&#9654;&nbsp; Book Direct</button>
+              <div class="scard">
+                <div class="sch">&#128269;&nbsp; Search Panel</div>
+                <div class="sbody">
+                  <label class="f">Pickup Time Within:</label>
+                  <select class="inp"><option>Any</option></select>
+                  <label class="f">Delivery Time Within:</label>
+                  <select class="inp"><option>Any</option></select>
+                  <label class="f">Load ID / Ref</label>
+                  <input class="inp">
+                  <label class="f">Booked by:</label>
+                  <select class="inp"><option></option></select>
+                  <div style="margin-top:12px;display:flex;gap:8px">
+                    <button class="btn-quote" style="padding:6px 18px">Search</button>
+                    <button class="btn">Clear</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hxright">
+              <div class="rhead">
+                <span>Quotes</span>
+                <span style="margin-left:auto"><a href="#" onclick="return false">Collapse All Entries</a></span>
+              </div>
+              <div class="rfilters">
+                <button class="tab on">Received</button><button class="tab">Archived</button>
+                <button class="tab">Submitted</button><button class="tab">Unsuccessful</button>
+              </div>
+
+              <div class="loadrow" style="border:1px solid #cfe0f0">
+                <div class="lr-top">
+                  <div class="lr-ship">
+                    <div><span class="lbl">From:</span> <b>NUNEATON</b>, CV11</div>
+                    <div><span class="lbl">To:</span> <b>LEEDS</b>, LS10</div>
+                  </div>
+                  <div class="lr-when">
+                    <div><span class="lbl">Pickup:</span> <b>08:00 – 12:00 (BST) 10/10/2026</b></div>
+                    <div><span class="lbl">Deliver:</span> <b>ASAP 11/10/2026</b></div>
+                  </div>
+                  <div class="lr-side">
+                    <div class="statusgrey">Deliver Direct</div>
+                    <div class="sidebody">
+                      <div class="postedby">Live</div>
+                      <div class="hint">@ 16:12 (BST) 06/10/2026</div>
+                      <div style="margin-top:5px;font-size:12.5px">Load ID: &nbsp;<b>89821268</b></div>
+                      <div class="vehtag">&#128667;<br>18t</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="lr-mid">
+                  <div>
+                    <div class="kvl"><span>Dist:</span><b>118.0 miles</b></div>
+                    <div class="kvl"><span>Weight:</span><b>8,400 kg</b></div>
+                  </div>
+                  <div>
+                    <div class="kvl"><span>Packaging:</span><b>12 Pallets</b></div>
+                    <div class="kvl"><span>Dims:</span><b>Not Supplied</b></div>
+                  </div>
+                  <div class="lr-right">
+                    <div class="kvl"><span>Requested:</span><b>18t Curtainsider</b></div>
+                    <div class="kvl"><span>Payment Terms:</span><b>30 Days (End Of Month)</b></div>
+                    <div class="kvl"><span>Take It Now:</span><b>£480.00</b></div>
+                  </div>
+                </div>
+                <div class="lr-notes">Load Notes: &nbsp;Bermuda Park. Forklift on site.</div>
+
+                <table class="qtbl">
+                  <tr>
+                    <th>Quote from Member</th><th>Vehicle</th>
+                    <th>&#128077;</th><th>&#128078;</th><th>&#128528;</th><th>&#128577;</th>
+                    <th>Phone</th><th>Created</th><th>Quote</th><th>Verified drivers</th><th>ETA</th><th></th>
+                  </tr>
+                  <tr class="tinrow">
+                    <td><a href="#" onclick="return false"><b>SIMON WILLITTS TRANSPORT LTD (GB 77100)</b></a></td>
+                    <td>18t Curtainsider</td><td>412</td><td>2</td><td>1</td><td>0</td>
+                    <td><a href="#" onclick="return false">+44 1924 112 334</a></td>
+                    <td>17:46 Oct 6</td><td><b>£480.00</b></td><td>14</td><td>1 hr</td>
+                    <td style="white-space:nowrap">
+                      <button class="btn-approve" id="qApprove">Approve</button>
+                      <button class="btn-decline" id="qDecline">Decline</button>
+                    </td>
+                  </tr>
+                  <tr class="tinnote">
+                    <td colspan="12">
+                      <b>Take It Now at your posted rate.</b> You have until 18:46 BST to approve or decline.
+                      No other member can take this load until then, though quotes can still be sent.
+                    </td>
+                  </tr>
+                  <tr class="quoterow">
+                    <td><a href="#" onclick="return false"><b>PENNINE FREIGHT LTD (GB 31884)</b></a></td>
+                    <td>18t Curtainsider</td><td>14</td><td>3</td><td>2</td><td>1</td>
+                    <td><a href="#" onclick="return false">+44 161 797 0832</a></td>
+                    <td>17:51 Oct 6</td><td><b>£455.00</b></td><td>2</td><td>3 hr</td>
+                    <td><button class="btn-decline">Accept quote</button></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#" onclick="return false"><b>FC TRANSPORT LEEDS LTD (GB 185618)</b></a></td>
+                    <td>18t Curtainsider</td><td>188</td><td>1</td><td>0</td><td>0</td>
+                    <td><a href="#" onclick="return false">+44 113 347 0010</a></td>
+                    <td>17:58 Oct 6</td><td><b>£492.00</b></td><td>9</td><td>2 hr</td>
+                    <td><button class="btn-decline">Accept quote</button></td>
+                  </tr>
+                </table>
+
+                <div class="qfoot">
+                  <button class="collapsetab">&#9650;</button>
+                  <span>This load has received <b>1</b> Take It Now and <b>2</b> quotes</span>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="hxads">
+              <div class="adbtn y">&#8594;&nbsp; Deals</div>
+              <div class="adbtn b">&#8594;&nbsp; Need insurance?</div>
+              <div class="adbox dark">Refer friends.<br>Get rewards.</div>
+              <div class="adbox">TELETRAC NAVMAN<br><span style="font-size:10px">Vehicle Tracking</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -762,11 +1243,32 @@
       <h3 id="sheetTitle">Take It Now</h3>
       <button class="xx" style="margin-left:auto" id="sheetClose">&times;</button>
     </header>
-    <div class="steps" id="sheetSteps">
-      <span class="on">1 · Load</span><span>›</span><span>2 · Terms</span><span>›</span><span>3 · Your times</span><span>›</span><span>4 · Done</span>
-    </div>
     <div class="body" id="sheetBody"></div>
     <footer id="sheetFoot"></footer>
+  </div>
+</div>
+
+<div class="overlay hide" id="wdWrap">
+  <div class="sheet" style="max-width:520px">
+    <header><h3>Withdraw from this load</h3>
+      <button class="xx" style="margin-left:auto" id="wdClose">&times;</button></header>
+    <div class="body">
+      <p style="margin-top:0">You took this load at the posted rate and it is held for you while the load poster
+        decides. Withdrawing now releases it to other members.</p>
+      <div class="ql" style="font-size:13px">Booking Footer</div>
+      <div class="footerprev">Waiting time: 2 hours free at collection and delivery, then charged at £30 per hour.
+        Cancellation: free up to 24 hours before collection, 50% of the agreed rate thereafter. All loads subject to
+        our standard terms of carriage (RHA 2020).</div>
+      <div class="banner warn" style="margin-top:12px">
+        <span>&#9888;</span>
+        <div><b>Charges may apply.</b> The load poster's booking footer sets out what they can charge if you withdraw
+          after taking a load. Withdrawals are also recorded against your account.</div>
+      </div>
+    </div>
+    <footer><span style="margin-left:auto"></span>
+      <button class="btn" id="wdCancel">Keep the load</button>
+      <button class="btn" id="wdGo" style="background:#c0392b;border-color:#a33125;color:#fff;font-weight:bold">Withdraw</button>
+    </footer>
   </div>
 </div>
 
@@ -812,7 +1314,8 @@
 
   function setView(v) {
     state.view = v;
-    ["post", "carrier", "review"].forEach(function (k) {
+    document.body.classList.toggle("wide", v !== "post");
+    ["post", "carrier", "review", "quotes"].forEach(function (k) {
       $("view-" + k).classList.toggle("hidden", k !== v);
     });
     Array.prototype.forEach.call($("segs").children, function (b) {
@@ -939,174 +1442,302 @@
     }
   };
 
-  /* ---------------- carrier board ---------------- */
+  /* ---------------- carrier loads screen ---------------- */
+  var eligible_carrier = true;
+  var tinOnlyFilter = false;
+
   var LOADS = [
-    { bin: true, self: true, from: "Nuneaton CV11", to: "Leeds LS10", veh: "18t Curtainsider", load: "12 pallets · 8,400 kg", poster: "Hartwell Distribution Ltd", rating: "4.7", pay: "30 Days EOM" },
-    { bin: true, from: "Coventry CV6", to: "Carlisle CA1", veh: "Artic · 2.6m", load: "26 pallets", price: 720, lead: 3, poster: "Menzies Distribution", rating: "4.4", pay: "30 Days EOM" },
-    { bin: true, from: "Rugby CV21", to: "Bristol BS11", veh: "7.5t Box", load: "6 pallets", price: 310, lead: 2, poster: "Lane Logistics", rating: "4.9", pay: "30 Days from invoice" },
-    { bin: false, from: "Hinckley LE10", to: "Glasgow G32", veh: "Artic · 2.9m", load: "24 pallets", lead: 1, poster: "Bimson Haulage", rating: "4.1", pay: "60 Days" },
-    { bin: false, from: "Nuneaton CV11", to: "Milton Keynes MK1", veh: "18t Curtainsider", load: "10 pallets", lead: 4, poster: "GBA Services", rating: "3.8", pay: "45 Days" },
-    { bin: false, from: "Tamworth B77", to: "Exeter EX2", veh: "Artic · 2.6m", load: "22 pallets", lead: 5, poster: "Walkers Transport", rating: "4.5", pay: "30 Days EOM" }
+    { id: "89821281", from: "DUKINFIELD", fromPc: "SK16", to: "HULL", toPc: "HU3",
+      pickup: "13:50 06/10/2026 – 09:00 07/10/2026", deliver: "By 12:00 07/10/2026",
+      jobType: "Deliver Direct", poster: "Dave", member: "PENNINE LOGISTICS LTD.", gb: "GB 52153",
+      veh: "Luton", req: "Luton, Curtain Side", pay: "45 Days (End Of Month)", pod: "Unspecified",
+      dist: "95.7 miles", weight: "662 kg", pack: "2 Containers", dims: "120L × 120W × 187H cm",
+      notes: "Collect today before 16.00 for delivery tomorrow or load & go tomorrow.",
+      smartpay: true, backload: true },
+
+    { id: "89821274", from: "LEEDS", fromPc: "LS10", to: "BRISTOL", toPc: "BS11",
+      pickup: "08:00 – 12:00 09/10/2026", deliver: "By 16:00 10/10/2026",
+      jobType: "3 – 5 Days", poster: "Transport Desk", member: "MENZIES DISTRIBUTION", gb: "GB 31902",
+      veh: "Artic", req: "Artic, Curtain Side", pay: "30 Days (End Of Month)", pod: "Not Required",
+      dist: "212.4 miles", weight: "18,200 kg", pack: "26 Pallets", dims: "Not Supplied",
+      notes: "Loading from bay 4. Driver to report to transport office.",
+      smartpay: true, quotes: true, tin: { price: 640, approval: true, expires: "48 hours" } },
+
+    { id: "89821268", from: "NUNEATON", fromPc: "CV11", to: "LEEDS", toPc: "LS10",
+      pickup: "08:00 – 12:00 10/10/2026", deliver: "ASAP 11/10/2026",
+      jobType: "Deliver Direct", poster: "Planning", member: "HARTWELL DISTRIBUTION LTD", gb: "GB 88241",
+      veh: "18t", req: "18t Curtainsider", pay: "30 Days (End Of Month)", pod: "Not Required",
+      dist: "118.0 miles", weight: "8,400 kg", pack: "12 Pallets", dims: "Not Supplied",
+      notes: "Bermuda Park. Forklift on site.",
+      smartpay: true, backload: true, quotes: true, tin: { price: 480, approval: true, expires: "72 hours" } },
+
+    { id: "89821259", from: "MANCHESTER", fromPc: "M20", to: "KNUTSFORD", toPc: "WA16",
+      pickup: "13:50 – 14:50 06/10/2026", deliver: "ASAP",
+      jobType: "Same Day – Timed", poster: "ecourier", member: "LANE LOGISTICS LTD", gb: "GB 44120",
+      veh: "S/Van", req: "Small Van", pay: "30 Days (End Of Month)", pod: "Not Required",
+      dist: "16.6 miles", weight: "Not Supplied", pack: "Not Supplied", dims: "Not Supplied",
+      notes: "REF 88263005 // EQuotes Only – No Calls // Drivers MUST be trackable //",
+      smartpay: false },
+
+    { id: "89821244", from: "RUGBY", fromPc: "CV21", to: "CARLISLE", toPc: "CA1",
+      pickup: "07:00 – 11:00 11/10/2026", deliver: "By 18:00 11/10/2026",
+      jobType: "Next Day – Timed", poster: "Traffic", member: "WALKERS TRANSPORT", gb: "GB 60117",
+      veh: "Artic", req: "Artic up to 2.6m", pay: "60 Days", pod: "Not Required",
+      dist: "243.1 miles", weight: "21,000 kg", pack: "24 Pallets", dims: "Not Supplied",
+      notes: "Curtain side only.",
+      smartpay: true, quotes: false, tin: { price: 720, approval: false, expires: "96 hours" } }
   ];
 
-  var filter = "all";
-  Array.prototype.forEach.call($("carFilters").children, function (c) {
-    c.onclick = function () {
-      Array.prototype.forEach.call($("carFilters").children, function (x) { x.classList.remove("on"); });
-      c.classList.add("on");
-      filter = c.dataset.f;
-      renderLoads();
-    };
-  });
+  function tinOn(l) { return eligible_carrier && l.tin; }
 
   function loadRow(l) {
-    var price = l.self ? priceNum() : l.price;
-    var lead = l.self ? state.lead : l.lead;
-    var leadTxt = lead === 0 ? "collects today" : lead === 1 ? "collects tomorrow" : "collects in " + lead + " days";
-    var act;
-    if (l.bin) {
-      act = '<div class="price">£' + price + '</div>' +
-        '<button class="btn-amber" data-accept="' + (l.self ? "1" : "0") + '">Accept now</button>' +
-        (l.self && state.alsoQuotes ? '<button class="btn" style="padding:4px 10px">or send quote</button>' : "");
-    } else {
-      act = '<button class="btn btn-blue" style="padding:6px 12px">Send quote</button>';
-    }
-    return '<div class="row-load ' + (l.bin ? "bin" : "") + '">' +
-      '<div style="min-width:0">' +
-        '<div class="lane">' + l.from + ' → ' + l.to +
-          (l.bin ? ' <span class="binbadge">TAKE IT NOW</span>' : "") +
-          (l.self ? ' <span class="lead" style="background:#e6f1fb;color:#0f5ea8">your load</span>' : "") +
+    var tin = tinOn(l);
+    return '<div class="loadrow">' +
+      '<div class="lr-top">' +
+        '<div class="lr-ship">' +
+          '<div><span class="lbl">From:</span> <b>' + l.from + '</b>, ' + l.fromPc + '</div>' +
+          '<div><span class="lbl">To:</span> <b>' + l.to + '</b>, ' + l.toPc + '</div>' +
         '</div>' +
-        '<div class="sub2">' + l.veh + ' · ' + l.load + ' · ' + l.pay + '</div>' +
-        '<div class="sub2">' + l.poster + ' · ★ ' + l.rating + ' · <span class="lead">' + leadTxt + '</span></div>' +
-      '</div><div class="act">' + act + '</div></div>';
+        '<div class="lr-when">' +
+          '<div><span class="lbl">Pickup:</span> <b>' + l.pickup + '</b></div>' +
+          '<div><span class="lbl">Deliver:</span> <b>' + l.deliver + '</b></div>' +
+        '</div>' +
+        '<div class="lr-side">' +
+          '<div class="jobtypebar">' + l.jobType + '</div>' +
+          '<div class="sidebody">' +
+            '<div class="postedby">Posted by ' + l.poster + '</div>' +
+            '<div class="hint">@ 13:47 (BST) 06/10/2026</div>' +
+            '<div style="margin-top:5px;font-size:12.5px">Load ID: &nbsp;<b>' + l.id + '</b></div>' +
+            '<div class="vehtag">&#128667;<br>' + l.veh + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="lr-mid">' +
+        '<div>' +
+          '<div class="kvl"><span>Dist:</span><b>' + l.dist + '</b></div>' +
+          '<div class="kvl"><span>Weight:</span><b>' + l.weight + '</b></div>' +
+        '</div>' +
+        '<div>' +
+          '<div class="kvl"><span>Packaging:</span><b>' + l.pack + '</b></div>' +
+          '<div class="kvl"><span>Dims:</span><b>' + l.dims + '</b></div>' +
+        '</div>' +
+        '<div class="lr-right">' +
+          '<div class="kvl"><span>Requested:</span><b>' + l.req + '</b></div>' +
+          '<div class="kvl"><span>Payment Terms:</span><b>' + l.pay + '</b></div>' +
+          '<div class="kvl"><span>Hard copy POD:</span><b>' + l.pod + '</b></div>' +
+          (l.smartpay ? '<div class="smartpay">&pound; SmartPay Enabled</div>' : '') +
+        '</div>' +
+      '</div>' +
+      '<div class="lr-notes">Load Notes: &nbsp;' + l.notes + '</div>' +
+      '<div class="lr-foot">' +
+        '<button class="collapsetab">&#9650;</button>' +
+        '<button class="btn-quote" data-quote="' + l.id + '">Quote Now</button>' +
+        (tin ? '<button class="btn-tin" data-tin="' + l.id + '">Take It Now &pound;' + l.tin.price + '</button>' +
+               '<span class="tinexp">Take It Now expires in ' + l.tin.expires + '</span>' +
+               '<span class="tip" tabindex="0"><button class="ic" type="button">i</button>' +
+               '<span class="bubble">' +
+               (l.tin.approval
+                 ? 'The load poster has one hour to approve or decline. No other member can take it in that time, though quotes can still be sent. '
+                 : 'The load is yours as soon as you take it. ') +
+               '<a href="#" onclick="return false" style="color:#9ecbff">Learn more</a></span></span>'
+             : (l.backload ? '<span class="backloadtag">Backload Rate Offered</span>' : '')) +
+        '<span class="right"><a href="#" onclick="return false">View Details</a> (' + l.gb + ') ' +
+          '<a href="#" onclick="return false"><b>' + l.member + '</b></a></span>' +
+      '</div>' +
+    '</div>';
   }
 
   function renderLoads() {
-    var list = LOADS.filter(function (l) { return !(l.self && !(state.posted && state.binOn)); });
-    var bins = list.filter(function (l) { return l.bin; });
-    var stds = list.filter(function (l) { return !l.bin; });
-    var html = "";
-    if (filter === "all" || filter === "bin" || filter === "fleet") {
-      html += '<div class="grp">Take It Now — take it at the posted price (' + bins.length + ')</div>' + bins.map(loadRow).join("");
-    }
-    if (filter === "all" || filter === "std" || filter === "fleet") {
-      html += '<div class="grp">Quote only (' + stds.length + ')</div>' + stds.map(loadRow).join("");
-    }
-    $("loadList").innerHTML = html;
-    Array.prototype.forEach.call($("loadList").querySelectorAll("[data-accept]"), function (b) {
-      b.onclick = function () { openSheet(b.dataset.accept === "1"); };
+    if (!$("loadList")) return;
+    var list = LOADS.filter(function (l) { return tinOnlyFilter ? tinOn(l) : true; });
+    $("loadList").innerHTML = list.map(loadRow).join("");
+    if ($("resCount")) $("resCount").textContent = "1-" + list.length + " of " + (tinOnlyFilter ? list.length : 288);
+    if ($("tinFilterBox")) $("tinFilterBox").classList.toggle("hidden", !eligible_carrier);
+    Array.prototype.forEach.call($("loadList").querySelectorAll("[data-quote]"), function (b) {
+      b.onclick = function () { openSheet(b.dataset.quote, false); };
+    });
+    Array.prototype.forEach.call($("loadList").querySelectorAll("[data-tin]"), function (b) {
+      b.onclick = function () { openSheet(b.dataset.tin, true); };
     });
   }
 
-  /* ---------------- accept sheet ---------------- */
-  var sheetSelf = true;
-  function openSheet(isSelf) {
-    sheetSelf = isSelf; state.step = 1;
+  if ($("tinOnly")) {
+    $("tinOnly").onchange = function () { tinOnlyFilter = this.checked; renderLoads(); };
+  }
+  $("eligBtn").onclick = function () {
+    eligible_carrier = !eligible_carrier;
+    this.classList.toggle("on", eligible_carrier);
+    this.textContent = "Carrier meets criteria: " + (eligible_carrier ? "yes" : "no");
+    if ($("tinOnly")) { $("tinOnly").checked = false; tinOnlyFilter = false; }
+    renderLoads();
+  };
+
+  /* ---------------- quote / take it now modal ---------------- */
+  var sheetLoad = null, sheetStage = "quote";
+  var FOOTER_EXAMPLE =
+    "Waiting time: 2 hours free at collection and delivery, then charged at £30 per hour. " +
+    "Cancellation: free up to 24 hours before collection, 50% of the agreed rate thereafter. " +
+    "All loads subject to our standard terms of carriage (RHA 2020). POD required within 48 hours of delivery.";
+
+  function byId(id) {
+    for (var i = 0; i < LOADS.length; i++) { if (LOADS[i].id === id) return LOADS[i]; }
+    return null;
+  }
+
+  function openSheet(id, straightToTin) {
+    sheetLoad = byId(id);
+    sheetStage = straightToTin ? "tin" : "quote";
     $("sheetWrap").classList.remove("hide");
     renderSheet();
   }
   $("sheetClose").onclick = function () { $("sheetWrap").classList.add("hide"); };
 
-  function renderSheet() {
-    var price = sheetSelf ? priceNum() : 720;
-    var lane = sheetSelf ? "Nuneaton CV11 → Leeds LS10" : "Coventry CV6 → Carlisle CA1";
-    var approves = sheetSelf ? state.alloc === "accept" : false;
-    var steps = $("sheetSteps").children, idx = [0, 2, 4, 6];
-    Array.prototype.forEach.call(steps, function (s) { s.classList.remove("on"); });
-    steps[idx[state.step - 1]].classList.add("on");
-    $("sheetTitle").textContent = "Take It Now · " + lane;
+  function qHead(l) {
+    return '<div class="qbox">' +
+      '<div class="qhead">' +
+        '<div class="qlogo">Company<br>Logo</div>' +
+        '<div style="flex:1">' +
+          '<div style="font-weight:bold;font-size:14px">' + l.member + ' <span class="hint">(' + l.gb + ')</span></div>' +
+          '<div style="margin-top:6px;font-size:13px">Load ID: &nbsp;<b>' + l.id + '</b></div>' +
+          '<div style="margin-top:4px;font-size:13px">Req: &nbsp;<b>' + l.req + '</b></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="qrow"><span class="qlab">From:</span><b>' + l.from + ', ' + l.fromPc + ', GB</b>' +
+        '<span class="qtime">' + l.pickup + '</span></div>' +
+      '<div class="qrow"><span class="qlab">To:</span><b>' + l.to + ', ' + l.toPc + ', GB</b>' +
+        '<span class="qtime">' + l.deliver + '</span></div>' +
+    '</div>';
+  }
 
+  function renderSheet() {
+    var l = sheetLoad;
+    if (!l) return;
+    var tin = tinOn(l);
     var body = "", foot = "";
-    if (state.step === 1) {
-      body = '<div class="banner ok"><span>✓</span><div><b>Live load at a fixed price.</b>' +
-        'Take it at £' + price + ' and it is yours' +
-        (approves ? ", subject to the load poster approving within 30 minutes." : " — no quoting, no waiting.") + '</div></div>' +
-        '<div class="kv">Collection <b>' + fmt(pickDate()) + ' 08:00 – 12:00</b></div>' +
-        '<div class="kv">Delivery <b>' + fmt(dropDate()) + ' · ASAP</b></div>' +
-        '<div class="kv">Vehicle required <b>18t Curtainsider</b></div>' +
-        '<div class="kv">Load <b>12 pallets · 8,400 kg</b></div>' +
-        '<div class="kv">Job type <b>' + (state.jobType === "hotshot" ? "Hotshot" : "Backload") + '</b></div>' +
-        '<div class="kv">Posted by <b>Hartwell Distribution Ltd · ★ 4.7 · pays in 28 days on average</b></div>' +
-        '<div class="kv">Take It Now price <b style="font-size:15px">£' + price + '.00</b></div>' +
-        '';
-      foot = '<button class="btn" data-close>Back to loads</button>' +
-        '<button class="btn btn-amber" data-next style="margin-left:auto">Accept at £' + price + '</button>';
-    } else if (state.step === 2) {
-      body = '<p style="margin-top:0">What you are agreeing to on this load.</p>' +
-        '<div class="kv">Rate <b>£' + price + '.00</b></div>' +
-        '<div class="kv">Payment terms <b>30 days, end of month</b></div>' +
-        '<div class="kv">Exchange fee <b>£4.50</b></div>' +
-        '<div class="kv">Contracting with <b>Hartwell Distribution Ltd</b></div>' +
-        '<div class="kv">Booking Footer <b>Hartwell Distribution Ltd\'s cancellation and waiting time terms apply</b></div>' +
-        '<div class="cbx" style="margin-top:12px"><input type="checkbox" id="agree"><span>I accept these terms for this load</span></div>';
-      foot = '<button class="btn" data-back>Back</button>' +
-        '<button class="btn btn-amber" data-next id="agreeNext" style="margin-left:auto" disabled>Continue</button>';
-    } else if (state.step === 3) {
-      body = '<p style="margin-top:0">Confirm the vehicle and when you will be there.</p>' +
-        '<div class="fg"><label class="f">Vehicle</label><select class="inp">' +
-        '<option>YJ19 KTX · 18t Curtainsider</option><option>BV21 ODP · 18t Curtainsider</option></select></div>' +
-        '<div class="fg"><label class="f">Driver</label><select class="inp"><option>Mark Ellison — verified</option><option>Assign later</option></select></div>' +
-        '<div class="fg"><label class="f">Collection slot</label><select class="inp">' +
-        '<option>' + fmt(pickDate()) + ' 08:00 – 09:00</option><option>' + fmt(pickDate()) + ' 09:00 – 10:00</option>' +
-        '<option>' + fmt(pickDate()) + ' 11:00 – 12:00</option></select></div>' +
-        '<div class="fg"><label class="f">Estimated delivery</label><select class="inp">' +
-        '<option>' + fmt(dropDate()) + ' AM</option><option>' + fmt(dropDate()) + ' PM</option></select></div>';
-      foot = '<button class="btn" data-back>Back</button>' +
-        '<button class="btn btn-green" data-next style="margin-left:auto">' +
-        (approves ? "Accept — send for approval" : "Accept — book this load") + '</button>';
+
+    if (sheetStage === "quote") {
+      $("sheetTitle").textContent = "Quote Now";
+      body = qHead(l);
+
+      if (tin) {
+        body +=
+          '<div class="tinband">' +
+            '<div style="flex:1">' +
+              '<div class="tt">Take It Now: &pound;' + l.tin.price + '.00</div>' +
+              '<div class="hint" style="margin-top:3px">' +
+                (l.tin.approval
+                  ? "Take this load at the posted rate. The load poster has one hour to approve or decline, and no other member can take it in that time."
+                  : "Take this load at the posted rate. It is yours straight away.") +
+                (l.quotes ? " You can still send a quote instead." : "") +
+              '</div>' +
+            '</div>' +
+            '<button class="btn-tin" data-go-tin style="padding:9px 18px">Take It Now</button>' +
+          '</div>' +
+          '<div class="orline">or send your own quote</div>';
+      }
+
+      body +=
+        '<div class="qline"><div class="ql">Will Pick Up Within:</div>' +
+          '<select class="inp" style="max-width:150px"><option>Not Supplied</option><option>1 hour</option><option>2 hours</option></select></div>' +
+        '<div class="qline"><div class="ql">Vehicle: <span class="req">*</span></div>' +
+          '<select class="inp" style="max-width:210px"><option></option><option>YJ19 KTX</option></select></div>' +
+        '<div class="qline"><div class="ql">Choose currency:</div>' +
+          '<select class="inp" style="max-width:88px"><option>GBP</option><option>EUR</option></select></div>' +
+        '<div class="qline"><div class="ql">My Quote: <span class="req">*</span><br><span class="hint">price (exc. VAT)</span></div>' +
+          '<span style="font-size:17px">&pound;</span><input class="inp" style="max-width:110px"></div>' +
+        '<div style="text-align:right"><span class="chip" style="color:var(--blue)">Extras &#43;</span></div>' +
+        '<div class="qtotal">Total: &pound; <b>0.00</b></div>' +
+        '<div class="ql" style="font-size:13px;margin-bottom:4px">Notes:</div>' +
+        '<textarea class="inp" rows="4"></textarea>';
+
+      foot = '<span style="margin-left:auto"></span><button class="btn" data-close>Cancel</button>' +
+             '<button class="btn btn-green">Submit Quote</button>';
+
+    } else if (sheetStage === "tin") {
+      $("sheetTitle").textContent = "Take It Now";
+      body = qHead(l) +
+        '<div class="tinband" style="display:block">' +
+          '<div class="tt">Take It Now: &pound;' + l.tin.price + '.00</div>' +
+          '<div class="hint" style="margin-top:3px">' +
+            (l.tin.approval
+              ? "The load poster has one hour to approve or decline. No other member can take it in that time"
+                + (l.quotes ? ", though quotes can still be sent." : ".")
+              : "The load is yours as soon as you take it.") +
+          '</div>' +
+        '</div>' +
+        '<div class="qline"><div class="ql">Payment Terms:</div><b>' + l.pay + '</b></div>' +
+        '<div class="qline"><div class="ql">Vehicle: <span class="req">*</span></div>' +
+          '<select class="inp" style="max-width:210px"><option>YJ19 KTX</option><option>BV21 ODP</option></select></div>' +
+        '<div class="qline"><div class="ql">Will Pick Up Within:</div>' +
+          '<select class="inp" style="max-width:150px"><option>Not Supplied</option><option>1 hour</option><option>2 hours</option></select></div>' +
+        '<div class="qtotal">Total: &pound; <b>' + l.tin.price + '.00</b></div>' +
+        '<div class="ql" style="font-size:13px">Booking Footer</div>' +
+        '<div class="footerprev">' + FOOTER_EXAMPLE + '</div>' +
+        '<div class="cbx" style="margin-top:12px"><input type="checkbox" id="tinAgree">' +
+          '<span>I accept this rate and ' + l.member + '’s booking footer</span></div>';
+
+      foot = '<button class="btn" data-back-quote>Quote Now instead</button>' +
+             '<span style="margin-left:auto"></span>' +
+             '<button class="btn btn-tin" id="tinGo" disabled style="opacity:.5">' +
+               (l.tin.approval ? "Take It Now" : "Take It Now at £" + l.tin.price) + '</button>';
+
     } else {
-      body = approves
-        ? '<div class="success"><b>Accepted at £' + price + ' — with the load poster now.</b><br>' +
-          'The load is held for you alone for 30 minutes and has stopped taking quotes. If it is not approved in ' +
-          'that time it goes back to the market and you are free of it.</div>'
-        : '<div class="success"><b>Booked. The load is yours at £' + price + '.</b><br>' +
-          'Confirmation is in your Loads tab and on its way by email.</div>';
-      foot = '<button class="btn" data-close style="margin-left:auto">Done</button>';
+      $("sheetTitle").textContent = "Take It Now";
+      body = l.tin.approval
+        ? '<div class="success"><b>Sent to ' + l.member + ' for approval.</b><br>' +
+          'The load is held for you for one hour. You will be notified as soon as they approve or decline.</div>'
+        : '<div class="success"><b>Booked. Load ' + l.id + ' is yours at &pound;' + l.tin.price + '.00.</b><br>' +
+          'It is now in your Loads tab, and confirmation is on its way by email.</div>';
+      foot = '<span style="margin-left:auto"></span><button class="btn btn-green" data-close>Done</button>';
     }
+
     $("sheetBody").innerHTML = body;
     $("sheetFoot").innerHTML = foot;
 
-    var ag = $("agree");
-    if (ag) ag.onchange = function () { $("agreeNext").disabled = !ag.checked; };
-    Array.prototype.forEach.call($("sheetFoot").querySelectorAll("[data-next]"), function (b) {
-      b.onclick = function () { state.step++; renderSheet(); };
-    });
-    Array.prototype.forEach.call($("sheetFoot").querySelectorAll("[data-back]"), function (b) {
-      b.onclick = function () { state.step--; renderSheet(); };
-    });
-    Array.prototype.forEach.call($("sheetFoot").querySelectorAll("[data-close]"), function (b) {
-      b.onclick = function () {
-        $("sheetWrap").classList.add("hide");
-        if (false) {
-          toast("Waiting on the load poster", "You accepted at £" + priceNum().toFixed(2) + ".",
-            "See their side", function () { setView("review"); });
-        }
+    var goTin = $("sheetBody").querySelector("[data-go-tin]");
+    if (goTin) goTin.onclick = function () { sheetStage = "tin"; renderSheet(); };
+
+    var agree = $("tinAgree");
+    if (agree) {
+      agree.onchange = function () {
+        $("tinGo").disabled = !agree.checked;
+        $("tinGo").style.opacity = agree.checked ? "1" : ".5";
       };
+      $("tinGo").onclick = function () {
+        if (this.disabled) return;
+        sheetStage = "done";
+        renderSheet();
+      };
+    }
+    var back = $("sheetFoot").querySelector("[data-back-quote]");
+    if (back) back.onclick = function () { sheetStage = "quote"; renderSheet(); };
+    Array.prototype.forEach.call($("sheetFoot").querySelectorAll("[data-close]"), function (b) {
+      b.onclick = function () { $("sheetWrap").classList.add("hide"); };
     });
   }
 
-  /* ---------------- review ---------------- */
-  function renderReview() {
-    $("revPick").textContent = fmt(pickDate()) + " 08:00 – 09:00";
-    $("revPrice").textContent = "£" + priceNum().toFixed(2);
-  }
-  $("confirmBtn").onclick = function () {
-    toast("Allocated — Simon Willitts Transport", "Load 4471902 booked at £" + priceNum().toFixed(2) + ".");
-    setView("carrier");
-  };
-  $("declineBtn").onclick = function () {
-    toast("Acceptance declined", "The load is live again with quotes only.");
-    setView("post");
-  };
+  function renderReview() { /* diary view is static markup */ }
 
-  var t = 29 * 60 + 41;
-  setInterval(function () {
-    if (state.view !== "review") return;
-    t = t > 0 ? t - 1 : 0;
-    var m = Math.floor(t / 60), s = t % 60;
-    $("countdown").textContent = "Approve within " + m + ":" + (s < 10 ? "0" : "") + s;
-  }, 1000);
+  if ($("qApprove")) {
+    $("qApprove").onclick = function () {
+      toast("Take It Now approved",
+        "Simon Willitts Transport Ltd is allocated load 89821268 at £480.00. Remaining quotes have been declined.");
+    };
+    $("qDecline").onclick = function () {
+      toast("Take It Now declined",
+        "The load is live again at £480.00 and quotes remain open. This is recorded against your reliability.");
+    };
+  }
+
+  if ($("withdrawBtn")) {
+    $("withdrawBtn").onclick = function () { $("wdWrap").classList.remove("hide"); };
+    $("wdClose").onclick = $("wdCancel").onclick = function () { $("wdWrap").classList.add("hide"); };
+    $("wdGo").onclick = function () {
+      $("wdWrap").classList.add("hide");
+      toast("Withdrawn from load 89821274",
+        "Menzies Distribution has been notified and the load is available to other members again.");
+    };
+  }
 
   $("resetBtn").onclick = function () {
     state.lead = 4; state.jobType = "hotshot"; state.binOn = false; state.price = "480.00";
